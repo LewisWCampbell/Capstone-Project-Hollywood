@@ -1,0 +1,45 @@
+cluster_id,name,description,movie_count,avg_confidence,n_sub_rails
+8,Cyberpunk Odyssey Cluster,"These films unite as futuristic, high-tech thrillers exploring the intersection of science and humanity.",759,0.988,50
+14,The Biographical Odyssey Cluster,"These films share a common narrative thread, exploring the lives and struggles of historical figures.",536,0.981,33
+3,East Asian Action Cinema Cluster,"Characterized by intense, stylized action and exploration of Asian culture.",516,0.985,35
+30,Romantic Comedies of Self-Discovery,"These films balance lighthearted humor with explorations of love, relationships, and personal growth.",501,0.977,30
+38,Psychological Horror Thrillers,Characterized by intense psychological horror and suspenseful atmospheres.,452,0.989,33
+10,Whimsical Fantasy Comedies,"These films share a lighthearted, imaginative blend of adventure, comedy, and fantasy elements.",389,0.984,25
+16,Wholesome Family Fantasies,"These films share a common blend of lighthearted adventure, heartwarming family dynamics, and uplifting emotional tone.",334,0.969,15
+26,The Shadowed Thrill Ride,"These films masterfully weave together suspense, deception, and crime to create a thrilling cinematic experience.",230,0.94,11
+2,Indian Action Dramas,"These films share a common blend of action, drama, and cultural elements set against the backdrop of modern India.",200,0.963,8
+37,The Shadowed Psyche Cluster,"These films converge on a dark, psychological exploration of the human psyche, often incorporating elements of horror and suspense.",189,0.907,7
+13,War and Human Struggle,Films that explore the human experience during wartime and its aftermath.,185,0.93,8
+43,Action Thrill Ride Cluster,"These films share a high-octane blend of intense action, suspenseful thrills, and relentless chases.",160,1.0,8
+41,High-Octane Thrill Ride,"These films combine intense action, suspenseful atmosphere, and relentless chases to create a pulse-pounding cinematic experience.",154,0.88,5
+32,LA Noir Thrillers,"Characterized by gritty, crime-ridden narratives set against the dark backdrop of Los Angeles.",150,0.871,7
+18,Whimsical Fantastical Comedies,"These films blend fantasy, comedy, and satire to create a unique narrative voice.",142,0.925,11
+7,Musical Romances and Comedies,"These films celebrate joy, love, and performance through music, comedy, and heartwarming storylines.",129,0.924,4
+6,Romantic Melodrama Cluster,Character-driven stories emphasizing emotional depth and musical elements.,127,0.798,9
+5,The Underdog's Triumph,Films celebrating the triumph of the underdog over adversity and personal growth.,122,0.792,9
+21,Romantic Realities,"Exploring the complexities and nuances of human relationships through nuanced, character-driven narratives.",121,0.95,4
+34,Buddy Cop Comedies,"Unifying these films is their blend of humor, action, and male friendship.",119,0.755,5
+17,Medieval Fantasy Odyssey Cluster,"These films share a common blend of high fantasy, adventure, and action elements set in medieval-inspired worlds.",116,0.672,8
+40,Psychological Thrillers of Isolation,"These films feature protagonists navigating dark, suspenseful worlds with heightened tension and psychological distress.",113,0.691,5
+22,Dark Fantasy Horror Realm,"These films unite as eerie, supernatural tales that explore the darker corners of human experience.",93,0.664,6
+25,French Romantic Dramas,Character-driven love stories set against the backdrop of France.,87,0.684,7
+0,The American Frontier Odyssey,These films share a common narrative thread of rugged individualism and pursuit of justice on the open range.,85,0.662,2
+29,Romantic NYC Comedies,"These films share a common blend of romance, humor, and New York City settings.",83,0.693,3
+23,Coming-of-Age Romances,"These films share a focus on the emotional and relational aspects of growing up, often with a romantic subplot.",78,0.785,5
+36,Crime Thrillers of Despair,"These films explore the darker side of human nature, delving into crime and suspense in a gritty, unflinching narrative.",73,0.621,3
+33,Comedic Quests and Capers,"Unifying films with lighthearted, humorous narratives that often feature adventurous protagonists on a mission or journey.",72,0.813,3
+1,Crime Thrillers of Deception,These films masterfully weave psychological suspense and crime elements to create a complex web of deception.,68,0.674,2
+9,Epic Quests of Old England,"These films unite as sweeping, action-packed tales of heroic struggle and adventure set against the richly detailed backdrop of medieval Britain.",60,0.753,3
+20,Gritty Crime Comedies,"These films blend dark humor and crime thrills, often with a British or American setting.",59,0.698,2
+42,Gritty Crime Thrillers,Character-driven dramas exploring the darker aspects of human nature and morality.,59,0.921,4
+27,The European Noir Thrillers,"Characterized by dark, suspenseful explorations of crime and law enforcement in post-war Europe.",58,0.752,2
+35,Southern Gothic Thrillers,These films explore the darker aspects of American South culture and society through crime thrillers and dramas.,41,0.806,3
+15,The Biographical Odyssey Cluster,"These films celebrate the lives and artistry of remarkable individuals through powerful, music-driven narratives.",34,0.771,3
+11,Thrill Ride Horror Adventures,"These films combine elements of horror and adventure to create an intense, suspenseful experience.",33,0.76,2
+4,Triumph Over Adversity Stories,"These films celebrate underdog victories and overcoming challenges, often with inspirational biographical narratives.",28,0.805,0
+12,Asian Dramas of Sorrow,"These films share a common focus on the struggles and cultural nuances of East Asia, often with melancholic and reflective narratives.",25,0.927,0
+24,Coming-of-Age Quests,These films unite as youthful adventurers navigate formative hardships and friendships on epic quests.,23,0.952,0
+28,Southern Romances and Heartland Drama,"These films share a common thread of gentle, sentimental storytelling set against the backdrop of small-town America.",21,0.957,0
+31,Romantic Melancholy Era Films,"Characterized by poignant, introspective portrayals of love and loss.",19,0.989,0
+39,Gritty Crime Dramas,"These films explore the darker aspects of human nature, delving into crime, social class, and moral conflict.",16,0.999,0
+19,Island Escapades and Romances,"These films combine adventure, comedy, and romance set on idyllic island settings.",15,1.0,0

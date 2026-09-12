@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project HOLLYWOOD — IDF Pipeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #e0e0e0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; padding: 40px 20px; min-height: 100vh; }
+  h1 { text-align: center; font-size: 28px; font-weight: 300; letter-spacing: 4px; color: #fff; margin-bottom: 8px; text-transform: uppercase; }
+  .subtitle { text-align: center; font-size: 14px; color: #888; margin-bottom: 50px; letter-spacing: 1px; }
+  .pipeline { display: flex; flex-direction: column; align-items: center; gap: 0; max-width: 900px; margin: 0 auto; }
+
+  /* Stage cards */
+  .stage { width: 100%; max-width: 720px; border-radius: 12px; padding: 24px 28px; position: relative; }
+  .stage-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .stage-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
+  .stage-title { font-size: 18px; font-weight: 600; }
+  .stage-body { font-size: 14px; line-height: 1.7; color: #bbb; padding-left: 2px; }
+  .stage-body .detail { margin-top: 6px; }
+  .stage-body code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #ddd; font-family: 'SF Mono', 'Fira Code', monospace; }
+  .dim { color: #777; font-size: 13px; margin-top: 4px; }
+
+  /* Colour themes per stage */
+  .stage.load { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-left: 3px solid #4a6fa5; }
+  .stage.load .stage-num { background: #4a6fa5; color: #fff; }
+  .stage.load .stage-title { color: #7eb8da; }
+
+  .stage.meta { background: linear-gradient(135deg, #1a1a2e 0%, #1e2a3a 100%); border-left: 3px solid #5b8fb9; }
+  .stage.meta .stage-num { background: #5b8fb9; color: #fff; }
+  .stage.meta .stage-title { color: #8ec5e2; }
+
+  .stage.features { background: linear-gradient(135deg, #1a2420 0%, #1a2e28 100%); border-left: 3px solid #4a9; }
+  .stage.features .stage-num { background: #4a9; color: #fff; }
+  .stage.features .stage-title { color: #6dcfab; }
+
+  .stage.preprocess { background: linear-gradient(135deg, #22201a 0%, #2e2a1a 100%); border-left: 3px solid #c9a84c; }
+  .stage.preprocess .stage-num { background: #c9a84c; color: #1a1a1a; }
+  .stage.preprocess .stage-title { color: #e8c96d; }
+
+  .stage.idf { background: linear-gradient(135deg, #2a1a1a 0%, #2e1e1e 100%); border-left: 3px solid #d4735e; }
+  .stage.idf .stage-num { background: #d4735e; color: #fff; }
+  .stage.idf .stage-title { color: #f09580; }
+
+  .stage.umap { background: linear-gradient(135deg, #251a2e 0%, #2e1e3a 100%); border-left: 3px solid #9b6dcd; }
+  .stage.umap .stage-num { background: #9b6dcd; color: #fff; }
+  .stage.umap .stage-title { color: #bf9af0; }
+
+  .stage.hdbscan { background: linear-gradient(135deg, #1a2028 0%, #1a2a38 100%); border-left: 3px solid #4a90d9; }
+  .stage.hdbscan .stage-num { background: #4a90d9; color: #fff; }
+  .stage.hdbscan .stage-title { color: #7ab8f5; }
+
+  .stage.naming { background: linear-gradient(135deg, #281a28 0%, #321e32 100%); border-left: 3px solid #c76dbd; }
+  .stage.naming .stage-num { background: #c76dbd; color: #fff; }
+  .stage.naming .stage-title { color: #e89de3; }
+
+  .stage.export { background: linear-gradient(135deg, #1a2420 0%, #1e3028 100%); border-left: 3px solid #5cb85c; }
+  .stage.export .stage-num { background: #5cb85c; color: #fff; }
+  .stage.export .stage-title { color: #7dd87d; }
+
+  /* Arrows between stages */
+  .arrow { display: flex; flex-direction: column; align-items: center; height: 36px; position: relative; }
+  .arrow-line { width: 2px; height: 100%; background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.3)); }
+  .arrow::after { content: ''; position: absolute; bottom: 0; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid rgba(255,255,255,0.3); }
+
+  /* Sweep badges */
+  .sweep-badge { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+  .sweep-badge.idf-sweep { background: rgba(212,115,94,0.2); color: #f09580; border: 1px solid rgba(212,115,94,0.3); }
+  .sweep-badge.umap-sweep { background: rgba(155,109,205,0.2); color: #bf9af0; border: 1px solid rgba(155,109,205,0.3); }
+  .sweep-badge.hdbscan-sweep { background: rgba(74,144,217,0.2); color: #7ab8f5; border: 1px solid rgba(74,144,217,0.3); }
+
+  /* Feature type tags */
+  .type-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .type-tag { padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; }
+  .type-tag.genome { background: rgba(74,170,153,0.15); color: #6dcfab; border: 1px solid rgba(74,170,153,0.25); }
+  .type-tag.genre { background: rgba(201,168,76,0.15); color: #e8c96d; border: 1px solid rgba(201,168,76,0.25); }
+  .type-tag.decade { background: rgba(155,109,205,0.15); color: #bf9af0; border: 1px solid rgba(155,109,205,0.25); }
+
+  /* Branch connector for per-type */
+  .branch-container { width: 100%; max-width: 720px; display: flex; gap: 10px; justify-content: center; }
+  .branch-card { flex: 1; border-radius: 8px; padding: 14px 16px; font-size: 13px; line-height: 1.6; }
+  .branch-card.genome-branch { background: rgba(74,170,153,0.08); border: 1px solid rgba(74,170,153,0.2); }
+  .branch-card.genre-branch { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); }
+  .branch-card.decade-branch { background: rgba(155,109,205,0.08); border: 1px solid rgba(155,109,205,0.2); }
+  .branch-card .branch-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .branch-card.genome-branch .branch-title { color: #6dcfab; }
+  .branch-card.genre-branch .branch-title { color: #e8c96d; }
+  .branch-card.decade-branch .branch-title { color: #bf9af0; }
+  .branch-card .branch-body { color: #999; font-size: 12px; }
+
+  /* IDF scope indicator */
+  .scope-row { display: flex; gap: 12px; margin-top: 10px; align-items: center; }
+  .scope-item { font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .scope-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .scope-dot.yes { background: #d4735e; }
+  .scope-dot.no { background: #555; }
+  .scope-label.yes { color: #f09580; }
+  .scope-label.no { color: #777; }
+</style>
+</head>
+<body>
+
+<h1>Project HOLLYWOOD</h1>
+<div class="subtitle">IDF Pipeline — Per-Type Preprocessing</div>
+
+<div class="pipeline">
+
+  <!-- 1. Load -->
+  <div class="stage load">
+    <div class="stage-header">
+      <span class="stage-num">Step 1</span>
+      <span class="stage-title">Load Genome Data</span>
+    </div>
+    <div class="stage-body">
+      Pivot longform genome scores into wide matrix
+      <div class="dim">~8,000 movies × 247 genome features (continuous 0–1)</div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 2. OMDB -->
+  <div class="stage meta">
+    <div class="stage-header">
+      <span class="stage-num">Step 2</span>
+      <span class="stage-title">Load OMDB Metadata</span>
+    </div>
+    <div class="stage-body">
+      Extract year, rating, genre, decade from OMDB JSON + <code>jordan_metadata.csv</code>
+      <div class="dim">Title lookup, tt_codes, decade extraction</div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 3. Features -->
+  <div class="stage features">
+    <div class="stage-header">
+      <span class="stage-num">Step 3</span>
+      <span class="stage-title">Genre + Decade One-Hot</span>
+    </div>
+    <div class="stage-body">
+      Append binary feature columns to the genome matrix
+      <div class="type-tags">
+        <span class="type-tag genre">~23 genre columns (genre_Action, genre_Drama, ...)</span>
+        <span class="type-tag decade">~10 decade columns (decade_1920s, ..., decade_2020s)</span>
+      </div>
+      <div class="dim" style="margin-top:8px">Decades are independent binary signals — no ordinal assumption</div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 4. Per-type preprocessing (branching) -->
+  <div class="stage preprocess">
+    <div class="stage-header">
+      <span class="stage-num">Step 4</span>
+      <span class="stage-title">Per-Type Preprocessing</span>
+    </div>
+    <div class="stage-body">
+      Each feature type handled according to its nature. Drop constant features across all types.
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <div class="branch-container">
+    <div class="branch-card genome-branch">
+      <div class="branch-title">Genomes (247)</div>
+      <div class="branch-body">Continuous 0–1<br>Impute missing → median<br>Keep as-is</div>
+    </div>
+    <div class="branch-card genre-branch">
+      <div class="branch-title">Genres (~23)</div>
+      <div class="branch-body">Binary 0/1<br>Fill NaN → 0<br>No scaling</div>
+    </div>
+    <div class="branch-card decade-branch">
+      <div class="branch-title">Decades (~10)</div>
+      <div class="branch-body">Binary 0/1<br>Fill NaN → 0<br>No scaling</div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 5. IDF -->
+  <div class="stage idf">
+    <div class="stage-header">
+      <span class="stage-num">Step 5</span>
+      <span class="stage-title">IDF Weighting</span>
+    </div>
+    <div class="stage-body">
+      Inverse Document Frequency weights features by rarity across movies.
+      <div class="detail">Transforms: <code>raw</code> score×IDF · <code>sublinear</code> (1+log)×IDF · <code>bm25</code> saturation curve</div>
+      <div class="scope-row">
+        <div class="scope-item"><span class="scope-dot yes"></span><span class="scope-label yes">Genomes — IDF weighted</span></div>
+        <div class="scope-item"><span class="scope-dot no"></span><span class="scope-label no">Genres — unweighted</span></div>
+        <div class="scope-item"><span class="scope-dot no"></span><span class="scope-label no">Decades — unweighted</span></div>
+      </div>
+      <div><span class="sweep-badge idf-sweep">SWEEP: 7 configs (raw, sublinear, bm25×5 k1 values)</span></div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 6. UMAP -->
+  <div class="stage umap">
+    <div class="stage-header">
+      <span class="stage-num">Step 6</span>
+      <span class="stage-title">UMAP Dimensionality Reduction</span>
+    </div>
+    <div class="stage-body">
+      <div class="detail">Production: <code>30D</code> clustering + <code>3D</code> visualisation · <code>correlation</code> distance · <code>min_dist=0.0</code></div>
+      <div><span class="sweep-badge umap-sweep">SWEEP: 216 combos (n_components × n_neighbors × metric × min_dist)</span></div>
+      <div class="dim">Metrics: silhouette, trustworthiness, DBCV</div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 7. HDBSCAN -->
+  <div class="stage hdbscan">
+    <div class="stage-header">
+      <span class="stage-num">Step 7</span>
+      <span class="stage-title">HDBSCAN Clustering</span>
+    </div>
+    <div class="stage-body">
+      <div class="detail">Production: <code>min_size=60</code> · <code>min_samples=15</code> · <code>eps=0.1</code> · <code>eom</code></div>
+      <div><span class="sweep-badge hdbscan-sweep">SWEEP: 350 combos (min_cluster_size × min_samples × epsilon × selection_method)</span></div>
+      <div class="dim">Metrics: silhouette, DBCV, persistence (ARI), avg membership probability</div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 8. Naming -->
+  <div class="stage naming">
+    <div class="stage-header">
+      <span class="stage-num">Step 8</span>
+      <span class="stage-title">LLM Cluster Naming</span>
+    </div>
+    <div class="stage-body">
+      Ollama <code>llama3.2:3b</code> names each cluster from its top discriminative features
+      <div class="dim">Centroid-based feature ranking → prompt → concise name</div>
+    </div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div></div>
+
+  <!-- 9. Export -->
+  <div class="stage export">
+    <div class="stage-header">
+      <span class="stage-num">Step 9</span>
+      <span class="stage-title">Export + Dashboard</span>
+    </div>
+    <div class="stage-body">
+      Joblib artifact bundle → Streamlit dashboard launch
+      <div class="dim">Labels, embeddings, cluster names, probabilities, feature matrix</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

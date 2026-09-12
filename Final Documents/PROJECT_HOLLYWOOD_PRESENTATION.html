@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Capstone Project 1 - Automated Content Rail Strategy</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&amp;family=Merriweather:wght@300;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<style>
+/* 1. CORE THEME: GALACTIC PURPLE */
+* { box-sizing: border-box; }
+body {
+  background-color: #020617;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+  color: #f1f5f9;
+}
+
+.slide-container {
+  display: none; 
+  align-items: center;
+  background: linear-gradient(135deg, #090614 0%, #110B29 50%, #06121E 100%);
+  height: 720px;
+  width: 1280px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 80px;
+  position: relative;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+.slide-container.active { display: flex; flex-direction: column; }
+
+/* SHIMMER EFFECT */
+.slide-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.slide-container > * { position: relative; z-index: 1; }
+
+/* 2. TYPOGRAPHY */
+h1, h2, h3 { color: #fff; font-family: 'Merriweather', serif; margin: 0; }
+
+.slide-title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: left;
+  width: 100%;
+  color: #a855f7;
+  border-left: 6px solid #0ea5e9;
+  padding-left: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.accent-text {
+  background: linear-gradient(to right, #a855f7, #0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p, li, td, th { font-size: 19px; line-height: 1.4; color: #cbd5e1; }
+
+/* 3. LAYOUTS */
+.content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+.two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; }
+.three-column { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; width: 100%; }
+
+.tile {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+}
+.tile h3 { color: #0ea5e9; font-size: 18px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-weight: 700; text-transform: uppercase; }
+.icon { color: #a855f7; font-size: 40px; margin-bottom: 15px; }
+
+/* 4. ABLATION CHART */
+.ablation-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.ablation-row {
+    display: grid;
+    grid-template-columns: 320px 1fr 120px;
+    align-items: center;
+    gap: 20px;
+}
+.ablation-label {
+    text-align: right;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+}
+.ablation-track {
+    height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.ablation-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #a855f7, #0ea5e9);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 15px;
+    font-weight: 700;
+    font-size: 14px;
+}
+.ablation-fill.loss {
+    background: linear-gradient(90deg, #64748b, #334155);
+}
+.ablation-stat {
+    font-weight: 800;
+    font-size: 18px;
+    color: #f43f5e;
+}
+
+/* 5. NAVIGATION SYSTEM (FLOATING BAR) */
+.nav-bar {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 8px 25px;
+  border-radius: 100px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px;
+  transition: all 0.2s;
+}
+.nav-btn:hover:not(:disabled) { color: #fff; transform: scale(1.1); }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+.progress-container { width: 180px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; position: relative; }
+.progress-bar { position: absolute; left: 0; top: 0; height: 100%; background: #a855f7; border-radius: 2px; transition: width 0.3s; }
+.slide-num { font-family: monospace; font-size: 13px; color: #cbd5e1; width: 60px; text-align: center; }
+
+/* VISUAL BOXES */
+.visual-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  height: 320px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.visual-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.evidence-img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+table { width: 100%; border-collapse: collapse; }
+th { background: rgba(139, 92, 246, 0.1); padding: 12px; text-align: left; color: #a855f7; border-bottom: 2px solid #a855f7; }
+td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.section-head { text-align: center; }
+.section-head h2 { font-size: 68px; margin-bottom: 20px; }
+.section-head hr { width: 100px; height: 4px; background: #0ea5e9; border: none; margin: 30px auto; }
+    </style>
+<style>
+/* Added from finals_miscs for merged slides */
+
+        /* 1. CORE THEME: GALACTIC PURPLE */
+        * { box-sizing: border-box; }
+        body {
+            background-color: #020617;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'DM Sans', sans-serif;
+            color: #f1f5f9;
+        }
+
+        .slide-container {
+            display: none; 
+            align-items: center;
+            background: linear-gradient(135deg, #090614 0%, #110B29 50%, #06121E 100%);
+            height: 720px;
+            width: 1280px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 40px 60px; /* Tightened padding to prevent spill */
+            position: relative;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .slide-container.active { display: flex; flex-direction: column; }
+
+        /* SHIMMER EFFECT */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .slide-container > * { position: relative; z-index: 1; width: 100%; }
+
+        /* 2. TYPOGRAPHY */
+        h1, h2, h3 { color: #fff; font-family: 'Merriweather', serif; margin: 0; }
+
+        .slide-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: left;
+            width: 100%;
+            color: #a855f7;
+            border-left: 6px solid #0ea5e9;
+            padding-left: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .accent-text {
+            background: linear-gradient(to right, #c084fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Adjusted text sizes and line heights for tighter fit */
+        p, li { font-size: 17px; line-height: 1.45; color: #cbd5e1; margin-bottom: 12px; }
+
+        /* 3. LAYOUT COMPONENTS */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #0ea5e9;
+        }
+
+        .icon-box {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #a855f7;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            border-left: 2px solid #334155;
+            padding-left: 20px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 1px;
+        }
+
+        /* 4. NAVIGATION UI */
+        .nav-controls {
+            position: fixed;
+            bottom: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover {
+            background: rgba(139, 92, 246, 0.4);
+            border-color: #0ea5e9;
+        }
+
+        /* FLOW VISUALIZER */
+        .pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            padding: 5px;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: #a855f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .step-arrow {
+            color: #334155;
+            font-size: 18px;
+        }
+
+        /* FORMULA STYLING */
+        #formula-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            border: 1px dashed rgba(139, 92, 246, 0.5);
+            margin-top: 25px;
+            padding: 40px 20px;
+        }
+    </style></head>
+<body><div class="slide-container active" id="slide1">
+<div class="content-area" style="text-align:center;">
+<i class="fa-solid fa-film accent-text" style="font-size: 70px; margin-bottom: 30px;"></i>
+<h1 class="accent-text" style="font-size: 80px;">Capstone Project 1</h1>
+<p style="font-size: 30px; letter-spacing: 3px; color: #fff; font-weight: 300; margin-top: 10px;">Automated Content Rail Strategy</p>
+<div style="margin-top: 60px; display: flex; justify-content: center; gap: 40px; font-weight: 700; color: #94a3b8; letter-spacing: 2px; font-size: 14px;">
+<span>JORDAN EHRMAN</span>
+<span>MANNY LARA</span>
+<span>LEWIS CAMPBELL</span>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide2">
+<div class="section-head">
+<hr/>
+<h2 class="accent-text">Problem Framing</h2>
+<p style="font-size: 24px; color: #94a3b8;">Discovery Beyond the Genre Tag</p>
+</div>
+</div>
+<div class="slide-container" id="slide3">
+<h2 class="slide-title">Defining the "Content Rail"</h2>
+<div class="content-area">
+<div class="two-column">
+<div class="tile">
+<h3 style="color: #a855f7;">Genomic "Vibe"</h3>
+<p>The core of each movie's "DNA" is derived from hand-annotated genomic traits mapped in <strong>feature_taxonomy.csv</strong> and categorical anchors from <strong>genre_data.csv</strong>.</p>
+<p style="margin-top: 10px;">We use unsupervised learning to cluster 8,000 films, capturing an organic thematic depth that standard labels miss.</p>
+</div>
+<div class="tile">
+<h3 style="color: #0ea5e9;">Dynamic Post-Clustering Curation</h3>
+<p>Using metadata sourced from <strong>TMDB</strong> and <strong>OMDB</strong>, we apply <strong>Heuristic Boundaries</strong> as a post-clustering layer to curate content based on context:</p>
+<ul style="font-size: 16px; margin-top: 10px; color: #cbd5e1;">
+<li><strong>Language:</strong> Filtering rail members based on user locale.</li>
+<li><strong>Content Rating:</strong> Enforcing strict safety boundaries (Family vs. Mature) on-the-fly.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="merged-slide-datasources">
+<h2 class="slide-title">Data Sources</h2>
+<div class="content-area">
+<div class="two-column">
+<!-- Left panel: Original Data -->
+<div class="tile">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
+<i class="fa-solid fa-database" style="color: #a855f7; font-size: 28px;"></i>
+<h3 style="color: #a855f7; margin: 0;">Original Data</h3>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px;">
+<div style="background: rgba(168, 85, 247, 0.08); border-left: 3px solid #a855f7; padding: 10px 14px; border-radius: 8px;">
+<strong style="color: #e2e8f0; font-size: 15px;">feature_data_longform.csv</strong>
+<p style="font-size: 13px; margin: 4px 0 0; color: #94a3b8;">~2M rows — genome relevance scores per movie × tag</p>
+</div>
+<div style="background: rgba(168, 85, 247, 0.08); border-left: 3px solid #a855f7; padding: 10px 14px; border-radius: 8px;">
+<strong style="color: #e2e8f0; font-size: 15px;">feature_taxonomy.csv</strong>
+<p style="font-size: 13px; margin: 4px 0 0; color: #94a3b8;">248 content tags — maps IDs to human-readable names</p>
+</div>
+<div style="background: rgba(168, 85, 247, 0.08); border-left: 3px solid #a855f7; padding: 10px 14px; border-radius: 8px;">
+<strong style="color: #e2e8f0; font-size: 15px;">genre_data.csv</strong>
+<p style="font-size: 13px; margin: 4px 0 0; color: #94a3b8;">IMDb IDs + genre labels for ~14,000 films</p>
+</div>
+</div>
+</div>
+<!-- Right panel: Enrichment APIs -->
+<div class="tile">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
+<i class="fa-solid fa-cloud-arrow-down" style="color: #0ea5e9; font-size: 28px;"></i>
+<h3 style="color: #0ea5e9; margin: 0;">Enrichment APIs</h3>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px;">
+<div>
+<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+<span style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.5px;">OMDB</span>
+<span style="color: #94a3b8; font-size: 14px;">Open Movie Database</span>
+</div>
+<ul style="font-size: 14px; color: #cbd5e1; margin: 0; padding-left: 20px; line-height: 1.7;">
+<li><strong>Poster URLs</strong> — high-res images for the dashboard</li>
+</ul>
+</div>
+<div>
+<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+<span style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.5px;">TMDB</span>
+<span style="color: #94a3b8; font-size: 14px;">The Movie Database</span>
+</div>
+<ul style="font-size: 14px; color: #cbd5e1; margin: 0; padding-left: 20px; line-height: 1.7;">
+<li><strong>Poster URLs</strong> — high-res images for the dashboard</li>
+<li><strong>Decades</strong> — release year bucketed into decade columns</li>
+<li><strong>Language</strong> — original language metadata</li>
+<li><strong>Content Rating</strong> — age/maturity classification</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide4">
+<h2 class="slide-title">Spine and Bumps Data Model</h2>
+<div class="content-area">
+<div class="two-column">
+<div class="tile">
+<ul style="display: flex; flex-direction: column; gap: 15px; padding-left: 5px; list-style: none;">
+<li><i class="fa-solid fa-dna text-purple-400 mr-2"></i> <strong>The Spine:</strong> 248 continuous genome scores sourced from <strong>taxonomy_data.csv</strong>.</li>
+<li><i class="fa-solid fa-tags text-sky-400 mr-2"></i> <strong>The "Bumps":</strong> 34 binary signals (23 Genres + 11 Decades) from <strong>OMDB</strong> and <strong>TMDB</strong>.</li>
+<li><i class="fa-solid fa-anchor text-indigo-400 mr-2"></i> <strong>Categorical Anchoring:</strong> Discrete signals provide essential structural edges to the continuous genomic DNA.</li>
+</ul>
+</div>
+<div class="visual-box" style="flex-direction: column; padding: 20px; height: 340px;">
+<svg height="280" viewbox="0 0 420 280" width="420">
+<!-- Title -->
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="11" letter-spacing="2" text-anchor="middle" x="210" y="18">SINGLE MOVIE FEATURE VECTOR (283D)</text>
+<!-- Spine section label -->
+<text fill="#a855f7" font-family="DM Sans, sans-serif" font-size="10" font-weight="700" letter-spacing="1" text-anchor="middle" x="135" y="42">SPINE — 248 GENOME SCORES</text>
+<!-- Spine: continuous bars (sampled representation) -->
+<g opacity="0.9">
+<rect fill="#7c3aed" height="60" rx="1" width="5" x="10" y="55"></rect><rect fill="#8b5cf6" height="45" rx="1" width="5" x="17" y="70"></rect>
+<rect fill="#a855f7" height="65" rx="1" width="5" x="24" y="50"></rect><rect fill="#7c3aed" height="35" rx="1" width="5" x="31" y="80"></rect>
+<rect fill="#9333ea" height="57" rx="1" width="5" x="38" y="58"></rect><rect fill="#6d28d9" height="25" rx="1" width="5" x="45" y="90"></rect>
+<rect fill="#a855f7" height="67" rx="1" width="5" x="52" y="48"></rect><rect fill="#8b5cf6" height="40" rx="1" width="5" x="59" y="75"></rect>
+<rect fill="#7c3aed" height="53" rx="1" width="5" x="66" y="62"></rect><rect fill="#9333ea" height="30" rx="1" width="5" x="73" y="85"></rect>
+<rect fill="#a855f7" height="63" rx="1" width="5" x="80" y="52"></rect><rect fill="#6d28d9" height="20" rx="1" width="5" x="87" y="95"></rect>
+<rect fill="#8b5cf6" height="55" rx="1" width="5" x="94" y="60"></rect><rect fill="#7c3aed" height="43" rx="1" width="5" x="101" y="72"></rect>
+<rect fill="#a855f7" height="60" rx="1" width="5" x="108" y="55"></rect><rect fill="#9333ea" height="27" rx="1" width="5" x="115" y="88"></rect>
+<rect fill="#8b5cf6" height="50" rx="1" width="5" x="122" y="65"></rect><rect fill="#7c3aed" height="37" rx="1" width="5" x="129" y="78"></rect>
+<rect fill="#a855f7" height="65" rx="1" width="5" x="136" y="50"></rect><rect fill="#6d28d9" height="23" rx="1" width="5" x="143" y="92"></rect>
+<rect fill="#9333ea" height="57" rx="1" width="5" x="150" y="58"></rect><rect fill="#8b5cf6" height="45" rx="1" width="5" x="157" y="70"></rect>
+<rect fill="#7c3aed" height="33" rx="1" width="5" x="164" y="82"></rect><rect fill="#a855f7" height="61" rx="1" width="5" x="171" y="54"></rect>
+<rect fill="#9333ea" height="39" rx="1" width="5" x="178" y="76"></rect><rect fill="#8b5cf6" height="52" rx="1" width="5" x="185" y="63"></rect>
+<rect fill="#6d28d9" height="29" rx="1" width="5" x="192" y="86"></rect><rect fill="#a855f7" height="63" rx="1" width="5" x="199" y="52"></rect>
+<rect fill="#7c3aed" height="47" rx="1" width="5" x="206" y="68"></rect><rect fill="#9333ea" height="25" rx="1" width="5" x="213" y="90"></rect>
+<rect fill="#8b5cf6" height="58" rx="1" width="5" x="220" y="57"></rect><rect fill="#a855f7" height="41" rx="1" width="5" x="227" y="74"></rect>
+<rect fill="#7c3aed" height="33" rx="1" width="5" x="234" y="82"></rect><rect fill="#9333ea" height="55" rx="1" width="5" x="241" y="60"></rect>
+<rect fill="#6d28d9" height="21" rx="1" width="5" x="248" y="94"></rect><rect fill="#a855f7" height="60" rx="1" width="5" x="255" y="55"></rect>
+</g>
+<!-- Ellipsis -->
+<text fill="#64748b" font-family="monospace" font-size="10" text-anchor="middle" x="135" y="132">... 248 continuous scores (0.0 – 1.0) ...</text>
+<!-- Divider -->
+<line stroke="#334155" stroke-dasharray="4 3" stroke-width="1" x1="270" x2="270" y1="40" y2="140"></line>
+<!-- Bumps section label -->
+<text fill="#0ea5e9" font-family="DM Sans, sans-serif" font-size="10" font-weight="700" letter-spacing="1" text-anchor="middle" x="345" y="42">BUMPS — 34 BINARY</text>
+<!-- Bumps: binary on/off squares -->
+<g>
+<!-- Genre bumps (23) -->
+<rect fill="#0ea5e9" height="12" rx="2" width="12" x="280" y="55"></rect><rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="295" y="55"></rect>
+<rect fill="#0ea5e9" height="12" rx="2" width="12" x="310" y="55"></rect><rect fill="#0ea5e9" height="12" rx="2" width="12" x="325" y="55"></rect>
+<rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="340" y="55"></rect>
+<rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="355" y="55"></rect>
+<rect fill="#0ea5e9" height="12" rx="2" width="12" x="370" y="55"></rect><rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="385" y="55"></rect>
+<rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="280" y="72"></rect>
+<rect fill="#0ea5e9" height="12" rx="2" width="12" x="295" y="72"></rect><rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="310" y="72"></rect>
+<rect fill="#0ea5e9" height="12" rx="2" width="12" x="325" y="72"></rect>
+<rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="340" y="72"></rect>
+<rect fill="#0ea5e9" height="12" rx="2" width="12" x="355" y="72"></rect>
+<rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="370" y="72"></rect>
+<rect fill="rgba(14,165,233,0.15)" height="12" rx="2" stroke="#0ea5e9" stroke-width="0.5" width="12" x="385" y="72"></rect>
+<text fill="#0ea5e9" font-family="DM Sans, sans-serif" font-size="8" opacity="0.8" text-anchor="middle" x="345" y="100">23 Genre flags</text>
+<!-- Decade bumps (11) -->
+<rect fill="rgba(251,146,60,0.15)" height="12" rx="2" stroke="#fb923c" stroke-width="0.5" width="12" x="289" y="110"></rect>
+<rect fill="rgba(251,146,60,0.15)" height="12" rx="2" stroke="#fb923c" stroke-width="0.5" width="12" x="304" y="110"></rect>
+<rect fill="rgba(251,146,60,0.15)" height="12" rx="2" stroke="#fb923c" stroke-width="0.5" width="12" x="319" y="110"></rect>
+<rect fill="rgba(251,146,60,0.15)" height="12" rx="2" stroke="#fb923c" stroke-width="0.5" width="12" x="334" y="110"></rect>
+<rect fill="rgba(251,146,60,0.15)" height="12" rx="2" stroke="#fb923c" stroke-width="0.5" width="12" x="349" y="110"></rect>
+<rect fill="rgba(251,146,60,0.15)" height="12" rx="2" stroke="#fb923c" stroke-width="0.5" width="12" x="364" y="110"></rect>
+<rect fill="#fb923c" height="12" rx="2" width="12" x="379" y="110"></rect>
+<text fill="#fb923c" font-family="DM Sans, sans-serif" font-size="8" opacity="0.8" text-anchor="middle" x="345" y="138">11 Decade flags (one-hot)</text>
+</g>
+<!-- Bottom summary bar -->
+<rect fill="rgba(255,255,255,0.03)" height="36" rx="8" stroke="rgba(139,92,246,0.2)" stroke-width="1" width="400" x="10" y="160"></rect>
+<rect fill="rgba(139,92,246,0.08)" height="36" rx="8" width="258" x="10" y="160"></rect>
+<text fill="#a855f7" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" text-anchor="middle" x="139" y="183">248 Genome Features (87%)</text>
+<rect fill="rgba(14,165,233,0.08)" height="36" rx="0" width="64" x="268" y="160"></rect>
+<text fill="#0ea5e9" font-family="DM Sans, sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="300" y="183">23 Genre</text>
+<rect fill="rgba(251,146,60,0.08)" height="36" rx="8" width="78" x="332" y="160"></rect>
+<text fill="#fb923c" font-family="DM Sans, sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="371" y="183">11 Decade</text>
+<!-- Total label -->
+<text fill="#fff" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="210" y="215">= 283-Dimensional Feature Vector per Film</text>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide5">
+<h2 class="slide-title">The "Bump" Effect</h2>
+<div class="content-area">
+<div style="margin-bottom: 20px;">
+<img alt="Ablation Study — Genre &amp; Decade Features Are Essential for Embedding Quality" class="evidence-img" src="figures/fig3_ablation_genre_decade.png"/>
+</div>
+<div class="three-column">
+<div class="tile">
+<h3>The Analysis</h3>
+<p style="font-size: 14px; color: #94a3b8;">Removing Genre/Decade features collapses structural anchoring. Bumps provide the "nudge" needed to separate regions into production-ready rails.</p>
+</div>
+<div class="tile">
+<h3>NN Overlap Drops 32%</h3>
+<p style="font-size: 14px; color: #94a3b8;">Panel B is the key finding: neighborhood overlap drops from ~0.56 to ~0.38 without bumps. Parameter sensitivity also collapses (Panel C), making the embedding brittle.</p>
+</div>
+<div class="tile">
+<h3>The Decision</h3>
+<p style="font-size: 14px; color: #94a3b8;"><strong>We included the Genre and Decade Features</strong>. These signals provide structural categorical anchoring that genome traits alone smear together.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="merged-slide-nn-explainer">
+<h2 class="slide-title">Why the 32% Drop Matters</h2>
+<div class="content-area" style="gap: 15px;">
+<div style="width: 100%; display: flex; justify-content: center;">
+<svg height="300" viewbox="0 0 900 300" width="900">
+<!-- Left: With Bumps -->
+<text fill="#0ea5e9" font-family="DM Sans, sans-serif" font-size="18" font-weight="700" text-anchor="middle" x="225" y="25">WITH BUMPS (0.56 overlap)</text>
+<circle cx="225" cy="145" fill="#a855f7" opacity="0.9" r="24"></circle>
+<text fill="#fff" font-size="13" font-weight="700" text-anchor="middle" x="225" y="151">FILM</text>
+<!-- Preserved neighbors -->
+<circle cx="140" cy="75" fill="#0ea5e9" opacity="0.8" r="14"></circle><circle cx="300" cy="70" fill="#0ea5e9" opacity="0.8" r="14"></circle>
+<circle cx="120" cy="155" fill="#0ea5e9" opacity="0.8" r="14"></circle><circle cx="330" cy="150" fill="#0ea5e9" opacity="0.8" r="14"></circle>
+<circle cx="150" cy="225" fill="#0ea5e9" opacity="0.8" r="14"></circle><circle cx="290" cy="230" fill="#0ea5e9" opacity="0.8" r="14"></circle>
+<circle cx="185" cy="55" fill="#0ea5e9" opacity="0.8" r="14"></circle><circle cx="265" cy="220" fill="#0ea5e9" opacity="0.8" r="14"></circle>
+<!-- Lost (grey) -->
+<circle cx="320" cy="225" fill="#475569" opacity="0.4" r="10"></circle><circle cx="125" cy="220" fill="#475569" opacity="0.4" r="10"></circle>
+<!-- Lines -->
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="225" x2="140" y1="145" y2="75"></line>
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="225" x2="300" y1="145" y2="70"></line>
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="225" x2="120" y1="145" y2="155"></line>
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="225" x2="330" y1="145" y2="150"></line>
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="225" x2="150" y1="145" y2="225"></line>
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="225" x2="290" y1="145" y2="230"></line>
+<text fill="#10b981" font-size="15" font-weight="700" text-anchor="middle" x="225" y="272">8 of 15 neighbors preserved</text>
+<text fill="#94a3b8" font-size="12" text-anchor="middle" x="225" y="292">Reliable rail assignments</text>
+<!-- Divider -->
+<line stroke="#334155" stroke-dasharray="6 4" stroke-width="1.5" x1="450" x2="450" y1="15" y2="295"></line>
+<!-- Right: Without Bumps -->
+<text fill="#f43f5e" font-family="DM Sans, sans-serif" font-size="18" font-weight="700" text-anchor="middle" x="675" y="25">WITHOUT BUMPS (0.38 overlap)</text>
+<circle cx="675" cy="145" fill="#a855f7" opacity="0.9" r="24"></circle>
+<text fill="#fff" font-size="13" font-weight="700" text-anchor="middle" x="675" y="151">FILM</text>
+<!-- Preserved (fewer) -->
+<circle cx="590" cy="80" fill="#0ea5e9" opacity="0.8" r="14"></circle><circle cx="755" cy="75" fill="#0ea5e9" opacity="0.8" r="14"></circle>
+<circle cx="575" cy="165" fill="#0ea5e9" opacity="0.8" r="14"></circle><circle cx="775" cy="160" fill="#0ea5e9" opacity="0.8" r="14"></circle>
+<circle cx="625" cy="225" fill="#0ea5e9" opacity="0.8" r="14"></circle><circle cx="730" cy="65" fill="#0ea5e9" opacity="0.8" r="14"></circle>
+<!-- Lost (grey) -->
+<circle cx="760" cy="225" fill="#475569" opacity="0.4" r="10"></circle><circle cx="585" cy="225" fill="#475569" opacity="0.4" r="10"></circle>
+<circle cx="620" cy="60" fill="#475569" opacity="0.4" r="10"></circle><circle cx="785" cy="120" fill="#475569" opacity="0.4" r="10"></circle>
+<circle cx="560" cy="120" fill="#475569" opacity="0.4" r="10"></circle>
+<!-- Intruders (red outlines) -->
+<circle cx="755" cy="220" fill="none" r="12" stroke="#f43f5e" stroke-width="2"></circle><circle cx="585" cy="220" fill="none" r="12" stroke="#f43f5e" stroke-width="2"></circle>
+<circle cx="790" cy="115" fill="none" r="12" stroke="#f43f5e" stroke-width="2"></circle>
+<!-- Lines -->
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="675" x2="590" y1="145" y2="80"></line>
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="675" x2="755" y1="145" y2="75"></line>
+<line opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" x1="675" x2="575" y1="145" y2="165"></line>
+<line opacity="0.5" stroke="#f43f5e" stroke-dasharray="5 3" stroke-width="1.5" x1="675" x2="755" y1="145" y2="220"></line>
+<line opacity="0.5" stroke="#f43f5e" stroke-dasharray="5 3" stroke-width="1.5" x1="675" x2="585" y1="145" y2="220"></line>
+<line opacity="0.5" stroke="#f43f5e" stroke-dasharray="5 3" stroke-width="1.5" x1="675" x2="790" y1="145" y2="115"></line>
+<text fill="#f43f5e" font-size="15" font-weight="700" text-anchor="middle" x="675" y="272">Only 6 preserved, 3+ intruders</text>
+<text fill="#94a3b8" font-size="12" text-anchor="middle" x="675" y="292">Wrong films end up on the same rail</text>
+</svg>
+</div>
+<div class="three-column">
+<div class="tile">
+<h3>What is NN Overlap?</h3>
+<p style="font-size: 14px; color: #94a3b8;">For each film: <em>"Of your 15 closest neighbors in 283D, how many survived compression to 20D?"</em> 0.56 = over half preserved — strong for 93% dimension reduction.</p>
+</div>
+<div class="tile">
+<h3>Why It's the Key Metric</h3>
+<p style="font-size: 14px; color: #94a3b8;">HDBSCAN clusters by <strong>proximity</strong>. Changed neighbors = wrong rail assignments. NN Overlap measures whether the embedding is <em>lying about who belongs together</em>.</p>
+</div>
+<div class="tile">
+<h3 style="color: #f43f5e;">The Real-World Impact</h3>
+<p style="font-size: 14px; color: #94a3b8;"><strong>32% fewer true neighbors = movies clustered with films that don't belong.</strong> A "Psychological Thriller" rail would have romantic comedies leaking in.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="merged-slide-zscore">
+<h2 class="slide-title">Preprocessing: Z-Score Normalization</h2>
+<div class="content-area" style="gap: 18px;">
+<!-- Visual: scale comparison -->
+<div style="width: 100%; display: flex; justify-content: center;">
+<svg height="220" viewbox="0 0 950 220" width="950">
+<!-- BEFORE SCALING -->
+<text fill="#f43f5e" font-family="DM Sans, sans-serif" font-size="17" font-weight="700" text-anchor="middle" x="225" y="22">BEFORE NORMALIZATION</text>
+<!-- Feature A bar — high raw score -->
+<rect fill="#1e293b" height="28" rx="6" stroke="#334155" stroke-width="1" width="330" x="60" y="45"></rect>
+<rect fill="#a855f7" height="28" opacity="0.7" rx="6" width="330" x="60" y="45"></rect>
+<text fill="#fff" font-size="13" font-weight="700" x="72" y="64">"entertaining": 2.8</text>
+<!-- Feature B bar — medium -->
+<rect fill="#1e293b" height="28" rx="6" stroke="#334155" stroke-width="1" width="150" x="60" y="85"></rect>
+<rect fill="#0ea5e9" height="28" opacity="0.7" rx="6" width="150" x="60" y="85"></rect>
+<text fill="#fff" font-size="13" font-weight="700" x="72" y="104">"dark comedy": 1.3</text>
+<!-- Feature C bar — tiny -->
+<rect fill="#1e293b" height="28" rx="3" stroke="#334155" stroke-width="1" width="40" x="60" y="125"></rect>
+<rect fill="#10b981" height="28" opacity="0.7" rx="3" width="40" x="60" y="125"></rect>
+<text fill="#94a3b8" font-size="13" x="112" y="144">"claymation": 0.3</text>
+<!-- Warning -->
+<text fill="#f43f5e" font-size="14" font-weight="700" text-anchor="middle" x="225" y="185">Raw scores have different spreads &amp; centers</text>
+<text fill="#94a3b8" font-size="12" text-anchor="middle" x="225" y="205">Features with higher means dominate distance</text>
+<!-- Divider -->
+<line stroke="#334155" stroke-dasharray="6 4" stroke-width="1.5" x1="475" x2="475" y1="10" y2="210"></line>
+<text fill="#a855f7" font-size="22" font-weight="700" text-anchor="middle" x="475" y="215">→</text>
+<!-- AFTER Z-SCORE -->
+<text fill="#10b981" font-family="DM Sans, sans-serif" font-size="17" font-weight="700" text-anchor="middle" x="725" y="22">AFTER Z-SCORE (mean=0, std=1)</text>
+<!-- Feature A bar — centered -->
+<rect fill="#1e293b" height="28" rx="6" stroke="#334155" stroke-width="1" width="195" x="560" y="45"></rect>
+<rect fill="#a855f7" height="28" opacity="0.7" rx="6" width="195" x="560" y="45"></rect>
+<text fill="#fff" font-size="13" font-weight="700" x="572" y="64">"entertaining": +0.6 σ</text>
+<!-- Feature B bar -->
+<rect fill="#1e293b" height="28" rx="6" stroke="#334155" stroke-width="1" width="240" x="560" y="85"></rect>
+<rect fill="#0ea5e9" height="28" opacity="0.7" rx="6" width="240" x="560" y="85"></rect>
+<text fill="#fff" font-size="13" font-weight="700" x="572" y="104">"dark comedy": +1.4 σ</text>
+<!-- Feature C bar -->
+<rect fill="#1e293b" height="28" rx="6" stroke="#334155" stroke-width="1" width="280" x="560" y="125"></rect>
+<rect fill="#10b981" height="28" opacity="0.7" rx="6" width="280" x="560" y="125"></rect>
+<text fill="#fff" font-size="13" font-weight="700" x="572" y="144">"claymation": +2.1 σ</text>
+<!-- Success -->
+<text fill="#10b981" font-size="14" font-weight="700" text-anchor="middle" x="725" y="185">Now measured in standard deviations from the mean</text>
+<text fill="#94a3b8" font-size="12" text-anchor="middle" x="725" y="205">A rare trait that's present stands out more</text>
+</svg>
+</div>
+<div class="three-column">
+<div class="tile">
+<h3>The Problem</h3>
+<p style="font-size: 14px; color: #94a3b8;">Genome scores range 0–3, but each feature has a <strong>different mean and spread</strong>. "Entertaining" averages ~2.1 across the catalog while "claymation" averages ~0.05. Without normalization, universally high-scoring features dominate distance calculations.</p>
+</div>
+<div class="tile">
+<h3>Why Z-Score?</h3>
+<p style="font-size: 14px; color: #94a3b8;">Z-score transforms each feature to <strong>mean = 0, std = 1</strong> using <em>(x − μ) / σ</em>. This centers every feature and equalizes their variance — so a film scoring 0.3 on a rare trait registers as <strong>exceptional</strong>, not invisible. It pairs naturally with IDF: z-score normalizes the <em>scale</em>, then IDF reweights by <em>rarity</em>.</p>
+</div>
+<div class="tile">
+<h3 style="color: #0ea5e9;">The Payoff</h3>
+<p style="font-size: 14px; color: #94a3b8;">After z-scoring, <strong>every genome feature votes with equal variance</strong> in downstream steps. This prevents UMAP and HDBSCAN from being biased toward features that simply have higher raw magnitudes — the clustering reflects genuine <em>content signal</em>, not scale artifacts.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide6">
+<h2 class="slide-title">Preprocessing: IDF Rarity Weighting</h2>
+<div class="content-area" style="gap: 15px;">
+<!-- Before / After visual using actual genome features -->
+<div style="width: 100%; display: flex; justify-content: center;">
+<svg height="280" viewbox="0 0 1050 280" width="1050">
+<!-- BEFORE IDF -->
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="14" font-weight="700" letter-spacing="1" text-anchor="middle" x="235" y="22">BEFORE IDF — RAW GENOME SCORES (0–3)</text>
+<!-- "Entertaining" — ubiquitous, scores high on almost every film -->
+<rect fill="#64748b" height="195" opacity="0.7" rx="4" width="55" x="15" y="40"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7.5" text-anchor="middle" x="42" y="250">Entertaining</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="42" y="55">2.8</text>
+<text fill="#64748b" font-size="7" text-anchor="middle" x="42" y="265">~6,500 films</text>
+<!-- "Visually Appealing" — very common -->
+<rect fill="#64748b" height="175" opacity="0.7" rx="4" width="55" x="80" y="60"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="6.5" text-anchor="middle" x="107" y="250">Visually Appealing</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="107" y="75">2.5</text>
+<text fill="#64748b" font-size="7" text-anchor="middle" x="107" y="265">~6,000 films</text>
+<!-- "Feature 1058" — common setting -->
+<rect fill="#64748b" height="140" opacity="0.6" rx="4" width="55" x="145" y="95"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7" text-anchor="middle" x="172" y="250">Feature 1058</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="172" y="110">2.0</text>
+<text fill="#64748b" font-size="7" text-anchor="middle" x="172" y="265">~3,800 films</text>
+<!-- "Stylized Violence" — moderate -->
+<rect fill="#8b5cf6" height="90" opacity="0.7" rx="4" width="55" x="210" y="145"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7" text-anchor="middle" x="237" y="250">Stylized Violence</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="237" y="160">1.3</text>
+<text fill="#64748b" font-size="7" text-anchor="middle" x="237" y="265">~1,200 films</text>
+<!-- "Feature 0182" — rare -->
+<rect fill="#a855f7" height="40" opacity="0.9" rx="4" width="55" x="275" y="195"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="5.8" text-anchor="middle" x="302" y="250">Feature 0182</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="302" y="210">0.6</text>
+<text fill="#64748b" font-size="7" text-anchor="middle" x="302" y="265">~120 films</text>
+<!-- "Claymation" — very rare -->
+<rect fill="#a855f7" height="25" opacity="0.9" rx="4" width="55" x="340" y="210"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7.5" text-anchor="middle" x="367" y="250">Claymation</text>
+<text fill="#fff" font-size="10" font-weight="700" text-anchor="middle" x="367" y="227">0.4</text>
+<text fill="#64748b" font-size="7" text-anchor="middle" x="367" y="265">~45 films</text>
+<!-- Problem callout -->
+<rect fill="rgba(244,63,94,0.1)" height="60" rx="8" stroke="#f43f5e" stroke-width="1" width="85" x="410" y="90"></rect>
+<text fill="#f43f5e" font-family="DM Sans, sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="452" y="112">Common genomes</text>
+<text fill="#f43f5e" font-family="DM Sans, sans-serif" font-size="9" text-anchor="middle" x="452" y="127">dominate signal</text>
+<text fill="#f43f5e" font-family="DM Sans, sans-serif" font-size="7.5" text-anchor="middle" x="452" y="142">(all films look similar)</text>
+<!-- Arrow -->
+<line marker-end="url(#arrowhead)" stroke="#0ea5e9" stroke-width="3" x1="510" x2="555" y1="140" y2="140"></line>
+<defs><marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="9" refy="3.5"><polygon fill="#0ea5e9" points="0 0, 10 3.5, 0 7"></polygon></marker></defs>
+<text fill="#0ea5e9" font-family="DM Sans, sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="533" y="125">IDF</text>
+<text fill="#94a3b8" font-family="monospace" font-size="8" text-anchor="middle" x="533" y="160">score × idf(t)</text>
+<!-- AFTER IDF -->
+<text fill="#10b981" font-family="DM Sans, sans-serif" font-size="14" font-weight="700" letter-spacing="1" text-anchor="middle" x="790" y="22">AFTER IDF — REWEIGHTED SCORES</text>
+<!-- "Entertaining" — crushed by low IDF -->
+<rect fill="#334155" height="50" opacity="0.6" rx="4" width="55" x="580" y="185"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7.5" text-anchor="middle" x="607" y="250">Entertaining</text>
+<text fill="#94a3b8" font-size="11" font-weight="700" text-anchor="middle" x="607" y="205">0.4</text>
+<text fill="#475569" font-size="7" text-anchor="middle" x="607" y="265">IDF ≈ 1.02</text>
+<!-- "Visually Appealing" — crushed -->
+<rect fill="#334155" height="45" opacity="0.6" rx="4" width="55" x="645" y="190"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="6.5" text-anchor="middle" x="672" y="250">Visually Appealing</text>
+<text fill="#94a3b8" font-size="11" font-weight="700" text-anchor="middle" x="672" y="210">0.3</text>
+<text fill="#475569" font-size="7" text-anchor="middle" x="672" y="265">IDF ≈ 1.03</text>
+<!-- "Feature 1058" — reduced -->
+<rect fill="#475569" height="75" opacity="0.6" rx="4" width="55" x="710" y="160"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7" text-anchor="middle" x="737" y="250">Feature 1058</text>
+<text fill="#cbd5e1" font-size="11" font-weight="700" text-anchor="middle" x="737" y="180">1.0</text>
+<text fill="#475569" font-size="7" text-anchor="middle" x="737" y="265">IDF ≈ 1.38</text>
+<!-- "Stylized Violence" — preserved / slight boost -->
+<rect fill="#8b5cf6" height="125" opacity="0.8" rx="4" width="55" x="775" y="110"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7" text-anchor="middle" x="802" y="250">Stylized Violence</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="802" y="128">1.8</text>
+<text fill="#10b981" font-size="7" text-anchor="middle" x="802" y="265">IDF ≈ 2.08</text>
+<!-- "Feature 0182" — amplified -->
+<rect fill="#a855f7" height="180" opacity="0.9" rx="4" width="55" x="840" y="55"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="5.8" text-anchor="middle" x="867" y="250">Feature 0182</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="867" y="73">2.7</text>
+<text fill="#10b981" font-size="7" text-anchor="middle" x="867" y="265">IDF ≈ 4.14</text>
+<!-- "Claymation" — massively amplified -->
+<rect fill="#a855f7" height="195" opacity="0.9" rx="4" width="55" x="905" y="40"></rect>
+<text fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="7.5" text-anchor="middle" x="932" y="250">Claymation</text>
+<text fill="#fff" font-size="11" font-weight="700" text-anchor="middle" x="932" y="58">3.1</text>
+<text fill="#10b981" font-size="7" text-anchor="middle" x="932" y="265">IDF ≈ 5.21</text>
+<!-- Result callout -->
+<rect fill="rgba(16,185,129,0.1)" height="60" rx="8" stroke="#10b981" stroke-width="1" width="70" x="970" y="90"></rect>
+<text fill="#10b981" font-family="DM Sans, sans-serif" font-size="8" font-weight="700" text-anchor="middle" x="1005" y="112">Distinctive</text>
+<text fill="#10b981" font-family="DM Sans, sans-serif" font-size="8" text-anchor="middle" x="1005" y="125">genomes now</text>
+<text fill="#10b981" font-family="DM Sans, sans-serif" font-size="8" text-anchor="middle" x="1005" y="138">drive clusters</text>
+</svg>
+</div>
+<!-- Key points row -->
+<div class="three-column">
+<div class="tile">
+<h3>The Formula</h3>
+<div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; margin-bottom: 8px;">
+<code style="color: #0ea5e9; font-size: 16px;">idf(t) = log((1+n)/(1+df(t))) + 1</code>
+</div>
+<p style="font-size: 13px; color: #94a3b8;">Features present in many films get a <strong>low</strong> multiplier. Features in few films get a <strong>high</strong> multiplier. Each genome score (0–3) is scaled by its feature's IDF weight.</p>
+</div>
+<div class="tile">
+<h3>Applied to Spine Only</h3>
+<p style="font-size: 13px; color: #94a3b8;">IDF reweights only the <strong>248 continuous genome columns</strong>. Each has a unique IDF weight based on how many films score &gt; 0 on that feature.</p>
+<p style="font-size: 13px; color: #94a3b8; margin-top: 6px;">Result: "claymation" (45 films) gets ~4x the weight of "entertaining" (6,500 films).</p>
+</div>
+<div class="tile">
+<h3>Why Not the Bumps?</h3>
+<p style="font-size: 13px; color: #94a3b8;">Genre and Decade columns are <strong>binary</strong> (0 or 1). Multiplying a binary column by a constant doesn't change relative distances between films — every film with that flag gets the same scaling.</p>
+<p style="font-size: 13px; color: #94a3b8; margin-top: 6px;">Bumps pass through <strong>untouched</strong> and get concatenated back after IDF.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="merged-slide-4">
+<div class="slide-title">Cluster Validation via XGBoost</div>
+<div class="content-grid">
+<div class="feature-card">
+<div class="icon-box" style="color: #f59e0b;"><i class="fas fa-project-diagram"></i></div>
+<h3>The XGBoost Engine</h3>
+<p><strong>eXtreme Gradient Boosting (XGBoost)</strong> is a highly efficient, tree-based machine learning algorithm capable of mapping complex, non-linear relationships in our data.</p>
+<p>Rather than using it to create clusters, we deploy it as a powerful diagnostic tool to test the mathematical validity of the clusters we've already formed.</p>
+</div>
+<div class="feature-card">
+<div class="icon-box" style="color: #f43f5e;"><i class="fas fa-check-double"></i></div>
+<h3>5-Fold Cross Validation</h3>
+<p>We train XGBoost to predict a title's assigned cluster using its genomic traits. We use <strong>5-Fold Cross Validation</strong> to ensure accuracy isn't a fluke.</p>
+<p>If the model can reliably predict the cluster assignment across all 5 folds, it proves our clusters have distinct, robust boundaries rather than just random noise.</p>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide7">
+<h2 class="slide-title">The Machine Learning Pipeline</h2>
+<div class="content-area">
+<div class="tiled-content" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+<div class="tile">
+<div class="icon" style="color:#a855f7; font-size:40px; margin-bottom:15px;"><i class="fa-solid fa-compress"></i></div>
+<h3>UMAP</h3>
+<p>283D to 20D reduction. Optimized for trustworthiness (0.987) using correlation distance.</p>
+</div>
+<div class="tile">
+<div class="icon" style="color:#a855f7; font-size:40px; margin-bottom:15px;"><i class="fa-solid fa-layer-group"></i></div>
+<h3>HDBSCAN</h3>
+<p>Density-based clustering. Discovered 41 organic clusters using EOM (Excess of Mass).</p>
+</div>
+<div class="tile">
+<div class="icon" style="color:#a855f7; font-size:40px; margin-bottom:15px;"><i class="fa-solid fa-robot"></i></div>
+<h3>XGBoost + LLM</h3>
+<p>Validated at 90% accuracy. SHAP profiles enable automated semantic naming via Llama 3.2.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide8">
+<h2 class="slide-title">UMAP: n_neighbors &amp; Metric selection</h2>
+<div class="content-area" style="gap: 15px;">
+<div style="width: 100%;">
+<img alt="UMAP Targeted Refinement — n_neighbors=60 Outperforms 100" class="evidence-img" src="figures/fig6_umap_refinement.png"/>
+</div>
+<div class="three-column">
+<div class="tile">
+<h3>Refinement (25 Combos)</h3>
+<p style="font-size: 14px; color: #94a3b8;">Focused on maximizing <strong>NN Overlap</strong>. Panel A: <span class="accent-text">n_neighbors=60</span> outperforms 100, peak overlap <strong>0.5692</strong>.</p>
+</div>
+<div class="tile">
+<h3>No Trustworthiness Tradeoff</h3>
+<p style="font-size: 14px; color: #94a3b8;">Panel B confirms trust is identical across all values (~0.987). We gain overlap without sacrificing fidelity.</p>
+</div>
+<div class="tile">
+<h3>Correlation Metric</h3>
+<p style="font-size: 14px; color: #94a3b8;">Preferred over Euclidean — groups films by profile <em>"shape"</em> (vibe) rather than absolute magnitude. Panel C heatmap confirms 60 is the clear peak.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide9">
+<h2 class="slide-title">UMAP: n_components Justification</h2>
+<div class="content-area" style="gap: 15px;">
+<div style="width: 100%;">
+<img alt="UMAP Parameter Sweep — Trustworthiness Plateaus, min_dist=0.1 Maximizes Overlap" class="evidence-img" src="figures/fig1_umap_parameter_justification.png"/>
+</div>
+<div class="three-column">
+<div class="tile">
+<h3>Retaining Complexity</h3>
+<p style="font-size: 14px; color: #94a3b8;">Panel A: Trustworthiness plateaus at n_neighbors ≥ 50. Values &lt; 10D lacked capacity to represent Era and Genre "Bumps" faithfully.</p>
+</div>
+<div class="tile">
+<h3>Avoiding Diffusion</h3>
+<p style="font-size: 14px; color: #94a3b8;">Values &gt; 50D suffered from "distance smearing," reducing density separation needed for HDBSCAN. Panel B: min_dist=0.1 maximizes overlap.</p>
+</div>
+<div class="tile">
+<h3>The 20D "Goldilocks" Zone</h3>
+<p style="font-size: 14px; color: #94a3b8;">20D maintained a <strong>0.987 Trustworthiness</strong> plateau while remaining computationally lean — the optimal balance.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide10">
+<h2 class="slide-title">HDBSCAN: Density Discovery</h2>
+<div class="content-area" style="gap: 15px;">
+<div style="width: 100%;">
+<img alt="HDBSCAN min_cluster_size Refinement — mcs=48 Sweet Spot, DBCV Cliff at 45" class="evidence-img" src="figures/fig7_mcs_refinement.png"/>
+</div>
+<div class="three-column">
+<div class="tile">
+<h3>DBCV Peaks at mcs=48</h3>
+<p style="font-size: 14px; color: #94a3b8;">Panel A: <strong>DBCV = 0.511</strong> — the highest density-based validity score across all configurations tested.</p>
+</div>
+<div class="tile">
+<h3>The Persistence Cliff</h3>
+<p style="font-size: 14px; color: #94a3b8;">Panel B: Below mcs=45, clusters explode while stability crashes. The "cliff" marks where results become fragile and unreproducible.</p>
+</div>
+<div class="tile">
+<h3>mcs=48 vs mcs=60</h3>
+<p style="font-size: 14px; color: #94a3b8;">Panel C: The new anchor is better on <strong>3 of 4 metrics</strong> — more clusters (41 vs 34), higher DBCV, comparable silhouette and probability.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide11">
+<h2 class="slide-title">Organic Rail Portfolio</h2>
+<div class="content-area">
+<div class="two-column">
+<div style="text-align:center;">
+<div style="font-size: 130px; font-weight: 700; color: #a855f7; line-height: 1;">67</div>
+<div style="font-size: 20px; font-weight: 700; text-transform: uppercase; color: #fff;">Organic Clusters</div>
+</div>
+<div class="tile">
+<h3>XGBoost Validation</h3>
+<p>Achieved <strong>90% Accuracy</strong> on audit. This proves the clusters are driven by genomic logic, not algorithmic noise.</p>
+<p style="margin-top:10px;"><strong>Coverage:</strong> 93% of the catalog assigned to high-density rails.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="merged-slide-2">
+<div class="slide-title">The Post-Cluster Divvy</div>
+<div class="content-grid">
+<div style="padding-right: 15px;">
+<p>Once clusters are established, we perform <strong>Hard Segmentation</strong> to create specialized, context-aware rails based on Language and Content Rating.</p>
+<p>This "action after clustering" ensures integrity. If a title's language or content rating doesn't match the final rail's strict intent, the segmentation acts as a hard guardrail to move it to a compliant home.</p>
+<div class="accent-text" style="font-weight: bold; margin-top: 15px; font-size: 18px;">
+                    Integrity First. Compliance Second.
+                </div>
+</div>
+<div class="pipeline">
+<div class="step">
+<div class="step-num">1</div>
+<div style="font-size: 13px; font-weight: bold;">Clustering<br/>(Full Pool)</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<div class="step">
+<div class="step-num" style="background: #0ea5e9;">2</div>
+<div style="font-size: 13px; font-weight: bold;">Hard Divvy<br/>(Segment)</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<div class="step">
+<div class="step-num" style="background: #10b981;">3</div>
+<div style="font-size: 13px; font-weight: bold;">Independent<br/>Sorting</div>
+</div>
+</div>
+</div>
+</div>
+<div class="slide-container" id="merged-slide-3">
+<div class="slide-title">Best Foot Forward</div>
+<div class="feature-card" style="width: 100%;">
+<div class="icon-box" style="color: #10b981; margin-bottom: 8px;"><i class="fas fa-star"></i></div>
+<h3 style="margin-bottom: 10px;">Independent Rating Sort</h3>
+<p>Instead of hard-cutting titles below a certain threshold globally, we <strong>sort each rail by user rating independently</strong>.</p>
+<p>This ensures the first titles a user sees are always the highest-rated "Ambassadors" of that specific cluster, providing a consistent sense of quality regardless of the niche.</p>
+<div style="display: flex; gap: 15px; margin-top: 20px;">
+<span style="background: rgba(168, 85, 247, 0.2); padding: 8px 18px; border-radius: 30px; font-size: 13px; border: 1px solid rgba(168, 85, 247, 0.3);">High-Rating Priority</span>
+<span style="background: rgba(14, 165, 233, 0.2); padding: 8px 18px; border-radius: 30px; font-size: 13px; border: 1px solid rgba(14, 165, 233, 0.3);">Dynamic Sequencing</span>
+<span style="background: rgba(16, 185, 129, 0.2); padding: 8px 18px; border-radius: 30px; font-size: 13px; border: 1px solid rgba(16, 185, 129, 0.3);">UX-Centric Leads</span>
+</div>
+</div>
+</div>
+<div class="slide-container" id="merged-slide-5">
+<div class="slide-title">SHAP Interpretability &amp; Naming</div>
+<div class="content-grid">
+<div class="feature-card">
+<div class="icon-box" style="color: #3b82f6;"><i class="fas fa-eye"></i></div>
+<h3>Demystifying the Black Box</h3>
+<p><strong>SHAP (SHapley Additive exPlanations)</strong> breaks down complex machine learning predictions to reveal exactly which features drove the result.</p>
+<p>It calculates the exact mathematical contribution of every genomic trait (e.g., "Dark", "Fast-Paced") that led a specific title to be placed in its specific cluster.</p>
+</div>
+<div class="feature-card">
+<div class="icon-box" style="color: #8b5cf6;"><i class="fas fa-tags"></i></div>
+<h3>Data-Driven Rail Naming</h3>
+<p>Once we identify what traits heavily define a cluster, we don't discard that data. We save the <strong>top SHAP values</strong> for each cluster.</p>
+<p>These dominant, defining features provide a literal vocabulary that we will use in the future to automatically generate highly accurate, descriptive names for our UI rails.</p>
+</div>
+</div>
+</div>
+<!-- Slide 12: Scaling & Integration -->
+
+<div class="slide-container" id="slide14">
+<div style="text-align: center;">
+<h2 class="accent-text" style="font-size: 80px;">Questions?</h2>
+<p style="font-size: 24px; margin-top: 30px; color: #fff;">Capstone Project 1 Final Review</p>
+<div style="margin-top: 40px; color: #94a3b8; font-family: monospace; font-size: 14px;">
+            JORDAN EHRMAN | MANNY LARA | LEWIS CAMPBELL
+        </div>
+</div>
+</div>
+<div class="slide-container" id="slide15">
+<div class="section-head">
+<hr/>
+<h2>Technical Appendix</h2>
+<p style="font-size: 24px; color: #94a3b8;">Empirical Evidence &amp; Logs</p>
+</div>
+</div>
+<div class="slide-container" id="slide16">
+<h2 class="slide-title">Appendix: UMAP Metric Comparison</h2>
+<div class="content-area" style="gap: 15px;">
+<div style="width: 100%;">
+<img alt="UMAP Metric Comparison — All Three Metrics Perform Equivalently" class="evidence-img" src="figures/fig2_umap_metric_comparison.png"/>
+</div>
+<div class="tile">
+<p>Correlation, cosine, and Euclidean all produce nearly identical trustworthiness (~0.980) and NN overlap (~0.559). We chose <strong>correlation</strong> for lowest reconstruction error (<strong>0.280</strong> vs 0.285–0.286) and its "profile shape" semantics — capturing <em>"this movie feels like that movie"</em> rather than absolute magnitude.</p>
+</div>
+</div>
+</div>
+<div class="slide-container" id="slide17">
+<h2 class="slide-title">Appendix: HDBSCAN Full Sweep</h2>
+<div class="content-area" style="gap: 15px;">
+<div style="width: 100%;">
+<img alt="HDBSCAN Parameter Sweep — Quality vs Granularity Tradeoff" class="evidence-img" src="figures/fig4_hdbscan_parameter_justification.png"/>
+</div>
+<div class="tile">
+<p>350+ combinations tested. <strong>Panel A:</strong> Quality vs granularity tradeoff — DBCV drops sharply as cluster count increases. <strong>Panel B:</strong> min_samples=10 is the quality inflection point — below 10, both DBCV and silhouette drop significantly. <strong>Panel C:</strong> EOM (Excess of Mass) dominates Leaf on all four metrics: DBCV, silhouette, persistence, and outlier balance.</p>
+</div>
+</div>
+</div>
+<div class="nav-bar">
+<button class="nav-btn" id="prevBtn" onclick="prevSlide()"><i class="fas fa-arrow-left"></i></button>
+<div class="progress-container">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+<div class="slide-num" id="slideNum">1 / 17</div>
+<button class="nav-btn" id="nextBtn" onclick="nextSlide()"><i class="fas fa-arrow-right"></i></button>
+</div>
+<script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide-container');
+    const slideNumDisplay = document.getElementById('slideNum');
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlideIndex);
+        });
+        
+        slideNumDisplay.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+        progressBar.style.width = `${((currentSlideIndex + 1) / slides.length) * 100}%`;
+        
+        prevBtn.disabled = currentSlideIndex === 0;
+        nextBtn.disabled = currentSlideIndex === slides.length - 1;
+    }
+
+    function nextSlide() {
+        if (currentSlideIndex < slides.length - 1) {
+            currentSlideIndex++;
+            updateSlides();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            updateSlides();
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+        else if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    updateSlides();
+</script></body>
+</html><div class="slide-container" id="slide13">
+<h2 class="slide-title">The Curator Dashboard</h2>
+<div class="content-area">
+<div class="tile">
+<div class="two-column">
+<ul style="display: flex; flex-direction: column; gap: 15px; list-style:none;">
+<li><i class="fa-solid fa-heart-pulse accent-text mr-2"></i> <strong>Data Health:</strong> Audit missing signals in real-time.</li>
+<li><i class="fa-solid fa-list-check accent-text mr-2"></i> <strong>Experiment Tracker:</strong> Log hyperparameter results (597+ configs).</li>
+<li><i class="fa-solid fa-cube accent-text mr-2"></i> <strong>Visual Manifold:</strong> Interactive 3D UMAP exploration.</li>
+</ul>
+<div style="display: flex; align-items: center; justify-content: center;">
+<i class="fa-solid fa-desktop accent-text" style="font-size: 100px;"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
