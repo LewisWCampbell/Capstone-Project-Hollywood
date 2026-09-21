@@ -73,40 +73,125 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("Movie Genome Clustering Dashboard")
-st.markdown("""
-Interactive dashboard for the **UMAP + HDBSCAN genome clustering pipeline** across ~8,000 films with 269 hand-annotated features.
+REPO_URL = "https://github.com/LewisWCampbell/Capstone-Project-Hollywood"
+NB_FINAL = f"{REPO_URL}/blob/main/Final%20Documents/PROJECT_HOLLYWOOD_FINAL.ipynb"
+NB_EXPERIMENTAL = f"{REPO_URL}/blob/main/Final%20Documents/PROJECT_HOLLYWOOD_EXPERIMENTAL.ipynb"
+CASE_STUDY_URL = "https://lewiswcampbell.com/blog/movie-rails-capstone.html"
 
-Use the sidebar to navigate between pages.
+st.title("Project Hollywood")
+st.markdown(
+    "#### Can a machine build the rows on a streaming homepage, using nothing but "
+    "what the films *are*?"
+)
+
+st.markdown(f"""
+This dashboard is the delivery layer of an MS Business Analytics capstone (Chapman University).
+The pipeline behind it takes **8,000 films**, described by a 248-feature content genome plus
+genre and decade flags, and organizes them into **67 coherent, human-readable "rails"** with no
+viewing data at all. Every rail is then validated, explained, and named automatically, and this
+app is where a curator reviews the result.
+
+**Use the sidebar to explore.** Start with **Final Rails** to see the shippable output, then open
+**Cluster Explorer** to click into any rail, see the features that define it, and browse its films.
 """)
 
-# --- Status Cards ---
-status = check_data_status()
+# --- Headline numbers ---
+m1, m2, m3, m4 = st.columns(4)
+m1.metric("Films organized", "8,000")
+m2.metric("Rails discovered", "67")
+m3.metric("Silhouette", "0.503")
+m4.metric("XGBoost label CV accuracy", "> 90 %")
 
-col1, col2, col3 = st.columns(3)
-col1.metric("CSV Data Files", f"{status['csv_count']}/{status['total_csvs']}")
-col2.metric("Pipeline Artifacts", "Available" if status['artifacts_exist'] else "Not Found")
-col3.metric("OMDB Data", "Available" if status['omdb_exists'] else "Not Found")
+# --- How it was built: point people at the notebooks ---
+st.markdown("---")
+st.subheader("How it was built")
+st.markdown(f"""
+The dashboard shows *results*. The reasoning lives in two Jupyter notebooks in the repository,
+and they are the best way to understand each decision:
 
-if not status['artifacts_exist']:
-    st.warning(
-        "Pipeline artifacts not found. Run the notebook (`Project_HOLLYWOOD.ipynb`) through "
-        "the 'Save Pipeline Artifacts' cell, or use the **Pipeline Runner** page to generate them."
+- **[PROJECT_HOLLYWOOD_FINAL.ipynb]({NB_FINAL})** is the pipeline start to finish, with a markdown
+  cell above every code cell explaining what it does and why. Read this one first.
+- **[PROJECT_HOLLYWOOD_EXPERIMENTAL.ipynb]({NB_EXPERIMENTAL})** holds the experiments behind the
+  final choices: the parameter sweeps, ablations, and the approaches that lost.
+""")
+
+c1, c2, c3 = st.columns(3)
+with c1:
+    st.markdown("**1. Weight and embed**")
+    st.caption(
+        "Each genome feature is IDF-weighted so rare, discriminating attributes carry more signal, "
+        "then z-scored. UMAP reduces the 284-dimension space to 20 components; the settings came "
+        "from a 105-combination sweep judged on neighbourhood preservation and trustworthiness."
+    )
+with c2:
+    st.markdown("**2. Cluster and validate**")
+    st.caption(
+        "HDBSCAN finds the rails and is honest about films that do not belong anywhere; "
+        "660 parameter combinations were compared. An XGBoost model then re-predicts the labels "
+        "from the raw features, proving the rails are real structure, and recovers confident "
+        "outliers (about 29 % of the noise)."
+    )
+with c3:
+    st.markdown("**3. Explain and name**")
+    st.caption(
+        "SHAP surfaces the handful of features that make each rail distinct. A language model "
+        "turns each rail's representative films, genre mix and era into a 2 to 5 word name and a "
+        "one-line description that a curator can accept, edit, or reject here."
     )
 
-# --- Page Directory ---
+st.markdown(f"""
+[Browse the repository]({REPO_URL}) &nbsp;·&nbsp; [Read the case study]({CASE_STUDY_URL})
+""")
+
+# --- Data note ---
+with st.expander("A note on the data"):
+    st.markdown("""
+The content genome was provided for the capstone by an industry partner and is proprietary.
+To make the project public, the feature, category and sub-category **names** are anonymized to
+ID-keyed placeholders (`Feature 0440`, `Category 13`). Feature IDs, relevance scores and every
+stage of the pipeline are unchanged, so the results you see here reproduce exactly. Film titles,
+genres, and poster metadata are public data from IMDb, OMDb and TMDB.
+""")
+
+# --- Status ---
 st.markdown("---")
 st.subheader("Pages")
 
 pages = [
-    ("1. Data Health", "Validate genome data before running the pipeline. Inspect sparsity, feature distributions, IDF weights, and annotation density."),
-    ("2. Pipeline Runner", "Run or re-run the full clustering pipeline with adjustable parameters. See live progress and metric summaries."),
-    ("3. Cluster Explorer", "Explore the UMAP embedding interactively. Inspect cluster contents, discriminative features, and outlier tiers."),
-    ("4. Film Explorer", "Deep-dive into any individual film — genome profile, soft membership, and nearest neighbours."),
-    ("5. Experiment Tracker", "Compare pipeline runs across parameter configurations. Track metric history and parameter sensitivity."),
-    ("6. Final Approved Rails", "Read-only summary of all approved content rails — names, descriptions, film counts, and downloadable mapping export."),
-    ("7. Outlier Review", "Review XGBoost recovery suggestions for outlier films. Approve or reject cluster assignments one-by-one or in batch."),
+    ("Final Rails", "The shippable output: every approved rail with its name, description, film count, and an exportable film-to-rail mapping."),
+    ("Cluster Explorer", "Interactive UMAP views. Click into a rail to see its defining features, its films with posters, and outlier tiers."),
+    ("Film Explorer", "Search any title and see its rail, assignment confidence, genome profile and nearest neighbours."),
+    ("Outlier Review", "Triage films HDBSCAN could not place, using the XGBoost recovery suggestions, one at a time or in batch."),
+    ("Data Health", "Sparsity, feature distributions, IDF weights and annotation density of the input data."),
+    ("Pipeline Runner", "Re-run the clustering pipeline with different parameters and watch the metrics change."),
+    ("Experiment Tracker", "Compare runs across parameter configurations and track metric history."),
 ]
-
 for title, desc in pages:
-    st.markdown(f"**{title}** — {desc}")
+    st.markdown(f"**{title}**: {desc}")
+
+status = check_data_status()
+with st.expander("Environment status"):
+    s1, s2, s3 = st.columns(3)
+    s1.metric("Data files", f"{status['csv_count']}/{status['total_csvs']}")
+    s2.metric("Pipeline artifacts", "Available" if status['artifacts_exist'] else "Not found")
+    s3.metric("OMDb metadata", "Available" if status['omdb_exists'] else "Not found")
+    if not status['artifacts_exist']:
+        st.warning(
+            "Pipeline artifacts not found. Run the FINAL notebook through the "
+            "'Save Pipeline Artifacts' cell, or use the Pipeline Runner page to generate them."
+        )
+
+    from utils import llm as _llm
+    st.markdown(f"**LLM naming backend:** `{_llm.llm_backend()}`")
+    if st.button("Test LLM naming connection"):
+        with st.spinner("Calling the naming model..."):
+            reply = _llm.query_ollama(
+                "Reply with exactly two words: connection works"
+            )
+        if reply:
+            st.success(f"Backend `{_llm.llm_backend()}` replied: {reply}")
+        else:
+            st.error(
+                f"No reply from backend `{_llm.llm_backend()}`. "
+                f"Last error: {_llm.LAST_LLM_ERROR or 'none recorded'}"
+            )
