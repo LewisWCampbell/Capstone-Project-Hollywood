@@ -79,6 +79,8 @@ NB_EXPERIMENTAL = f"{REPO_URL}/blob/main/Final%20Documents/PROJECT_HOLLYWOOD_EXP
 CASE_STUDY_URL = "https://lewiswcampbell.com/blog/movie-rails-capstone.html"
 
 st.title("Project Hollywood")
+from utils import auto_naming as _an
+_an.status_banner(st)
 st.markdown(
     "#### Can a machine build the rows on a streaming homepage, using nothing but "
     "what the films *are*?"
@@ -165,7 +167,7 @@ pages = [
     ("Data Health", "Sparsity, feature distributions, IDF weights and annotation density of the input data."),
     ("Pipeline Runner", "Re-run the clustering pipeline with different parameters and watch the metrics change."),
     ("Experiment Tracker", "Compare runs across parameter configurations and track metric history."),
-    ("Rail Naming", "Regenerate every rail and sub-rail name with the language model (admin key required)."),
+    ("Rail Naming", "Status of automatic rail naming, with an admin re-run and downloadable name files."),
 ]
 for title, desc in pages:
     st.markdown(f"**{title}**: {desc}")

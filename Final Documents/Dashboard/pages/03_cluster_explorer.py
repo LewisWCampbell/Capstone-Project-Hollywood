@@ -168,6 +168,8 @@ st.markdown("""
 st.title("Interactive Cluster Explorer")
 
 arts = load_pipeline_artifacts()
+from utils import auto_naming as _an
+_an.status_banner(st)
 if arts is None:
     st.error("Pipeline artifacts not found. Run the notebook or Pipeline Runner first.")
     st.stop()

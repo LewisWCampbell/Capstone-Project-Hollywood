@@ -1,5 +1,6 @@
 """Data loading and caching layer for the Movie Genome Dashboard."""
 
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -206,6 +207,25 @@ def load_tmdb_popularity() -> dict:
     return {}
 
 
+def _secret(name: str) -> str:
+    val = os.getenv(name, '')
+    if val:
+        return val
+    try:
+        return str(st.secrets.get(name, '') or '')
+    except Exception:
+        return ''
+
+
+def _kick_off_auto_naming():
+    """Start the one-time background rail-naming run (no-op after the first call)."""
+    try:
+        from utils import auto_naming
+        auto_naming.ensure_rail_names(_secret)
+    except Exception as e:  # naming is a nicety; never block the dashboard
+        print(f"auto naming not started: {e}")
+
+
 def load_pipeline_artifacts() -> dict:
     """Load pipeline artifacts from the Parquet + JSON artifacts directory.
 
@@ -213,8 +233,10 @@ def load_pipeline_artifacts() -> dict:
     """
     artifacts_dir = RESULTS_DIR / 'artifacts'
     if artifacts_dir.is_dir() and any(artifacts_dir.glob('*.parquet')):
-        # Use newest parquet file mtime to invalidate cache
-        newest = max(f.stat().st_mtime_ns for f in artifacts_dir.iterdir() if f.is_file())
+        _kick_off_auto_naming()
+        # Use newest file mtime to invalidate cache (names update as they are generated)
+        newest = max(f.stat().st_mtime_ns for f in artifacts_dir.iterdir()
+                     if f.is_file() and f.name != 'naming_status.json')
         return _load_artifacts_dir_cached(str(artifacts_dir), newest)
 
     # Legacy fallback: try .pkl file
