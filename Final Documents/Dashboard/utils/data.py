@@ -14,6 +14,7 @@ EXTRA_DATA_DIR = PIPELINE_DATA_DIR / 'extra_data'
 RESULTS_DIR = Path(__file__).parent.parent / 'results'      # Dashboard/results/
 # Legacy alias — some helpers still reference BASE_DIR for imdb_posters etc.
 BASE_DIR = PROJECT_DIR
+LOCAL_POSTER_DIR = PROJECT_DIR.parent / 'posters'   # repo-root posters/ (Git LFS)
 
 
 def _mtime_ns(path: Path) -> int:
@@ -289,13 +290,28 @@ def get_poster_src(tt_code: str, omdb_entry: dict | None = None, size: str = '14
         if url and url != 'N/A':
             return url
 
-    # 3. Fall back to OMDB poster API using the tt_code directly
-    if tt_code.startswith('tt'):
+    # 3. Local poster shipped in the repo (posters/<tt>.jpg, served via static/posters symlink)
+    if (LOCAL_POSTER_DIR / f'{tt_code}.jpg').exists():
+        return f'app/static/posters/{tt_code}.jpg'
+
+    # 4. Fall back to OMDB poster API using the tt_code directly
+    if OMDB_API_KEY and tt_code.startswith('tt'):
         return f'http://img.omdbapi.com/?apikey={OMDB_API_KEY}&i={tt_code}'
 
-    # 4. Placeholder
+    # 5. Placeholder
     w, h = size.split('x')
     return f'https://via.placeholder.com/{w}x{h}/1e232d/c9d1d9?text=No+Poster'
+
+
+def has_poster(tt_code: str, omdb_entry: dict | None = None) -> bool:
+    """True when a poster is known to exist (IMDb/TMDB URL map, OMDb URL, or local file)."""
+    if tt_code in _load_imdb_poster_urls():
+        return True
+    if omdb_entry:
+        url = omdb_entry.get('Poster', '')
+        if url and url != 'N/A':
+            return True
+    return (LOCAL_POSTER_DIR / f'{tt_code}.jpg').exists()
 
 
 def get_title(tt_code: str) -> str:

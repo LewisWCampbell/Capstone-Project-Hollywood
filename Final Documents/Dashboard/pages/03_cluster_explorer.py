@@ -9,7 +9,7 @@ from pathlib import Path
 from utils.data import (
     load_pipeline_artifacts, load_cluster_summary, load_sub_cluster_summary,
     load_genres, build_title_lookup, load_omdb, load_tmdb_popularity,
-    RESULTS_DIR, get_poster_src,
+    RESULTS_DIR, get_poster_src, has_poster,
 )
 from utils.plots import (
     cluster_feature_bars, feature_radar, CLUSTER_COLOURS, OUTLIER_COLOURS,
@@ -546,6 +546,8 @@ for cid in cluster_ids_sorted:
                 _sel_items.append(_item)
             else:
                 _pend_items.append(_item)
+        for _lst in (_sel_items, _pend_items):
+            _lst.sort(key=lambda it: not has_poster(it['tt'], omdb.get(it['tt'], {})))
 
         with st.expander(f"Curating films in {c_name}", expanded=True):
             # ── CSS for poster grid editing ──
@@ -721,6 +723,8 @@ for cid in cluster_ids_sorted:
         _display_items.sort(key=lambda x: _jordan_year_map.get(tt_codes[x[1]], 9999))
     else:
         _display_items.sort(key=lambda x: x[2], reverse=True)
+    # Films without a known poster go to the end (stable, keeps chosen order otherwise)
+    _display_items.sort(key=lambda x: not has_poster(tt_codes[x[1]], omdb.get(tt_codes[x[1]], {})))
 
     rail_html = """
 <style>
@@ -1022,6 +1026,8 @@ for cid in cluster_ids_sorted:
                             _sub_sel.append(_item)
                         else:
                             _sub_pend.append(_item)
+                    for _lst in (_sub_sel, _sub_pend):
+                        _lst.sort(key=lambda it: not has_poster(it['tt'], omdb.get(it['tt'], {})))
 
                     with st.expander(f"Curating films in {_display_name}", expanded=True):
                         st.markdown(
@@ -1105,6 +1111,7 @@ for cid in cluster_ids_sorted:
                     _sub_display.sort(key=lambda x: _jordan_year_map.get(tt_codes[x[1]], 9999))
                 else:
                     _sub_display.sort(key=lambda x: x[2], reverse=True)
+                _sub_display.sort(key=lambda x: not has_poster(tt_codes[x[1]], omdb.get(tt_codes[x[1]], {})))
 
                 sub_rail_html = '<div class="rail-container">'
                 for _rank, (_li, _gi, _conf) in enumerate(_sub_display[:100], 1):

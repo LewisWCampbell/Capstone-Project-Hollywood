@@ -96,3 +96,6 @@ _to_delete/
 # Dashboard artifacts the app needs (override the global *.json ignore above)
 !Final Documents/Dashboard/results/artifacts/*.json
 !Final Documents/Dashboard/results/cluster_status.json
+
+# Poster URL map (public TMDB/IMDb CDN links) used by the dashboard
+!Final Documents/imdb_posters/imdb_poster_urls.json

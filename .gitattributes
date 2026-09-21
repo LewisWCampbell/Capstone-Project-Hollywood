@@ -5,3 +5,4 @@ Final[[:space:]]Documents/Dashboard/static/posters/** filter=lfs diff=lfs merge=
 *.xlsx filter=lfs diff=lfs merge=lfs -text
 *.docx filter=lfs diff=lfs merge=lfs -text
 *.pkl filter=lfs diff=lfs merge=lfs -text
+Final[[:space:]]Documents/imdb_posters/*.json -filter -diff -merge text
