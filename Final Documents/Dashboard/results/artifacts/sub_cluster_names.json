@@ -1,0 +1,362 @@
+{
+ "(0, np.int64(0))": {
+  "name": "Indian Romantic Dramas",
+  "description": "This sub-group stands out from its parent rail due to its emphasis on romantic and dramatic storytelling, with a strong focus on Indian culture and set in the 2010s.",
+  "top_features": [
+   "genre_Romance (0.808)",
+   "genre_Drama (0.712)",
+   "genre_Comedy (0.615)",
+   "decade_2010s (0.481)",
+   "Feature 0144 (22.913)"
+  ],
+  "method": "movies_first"
+ },
+ "(0, np.int64(1))": {
+  "name": "Indian Crime Thrillers",
+  "description": "This sub-group is distinct within its parent rail due to its unique blend of crime and thriller elements, with a focus on Indian settings and a relatively high proportion of drama and action genres.",
+  "top_features": [
+   "genre_Crime (0.588)",
+   "genre_Drama (0.574)",
+   "genre_Action (0.529)",
+   "decade_2010s (0.368)",
+   "Feature 0144 (23.537)"
+  ],
+  "method": "movies_first"
+ },
+ "(1, np.int64(0))": {
+  "name": "Southern American Comedies",
+  "description": "The \"Southern American Comedies\" sub-group is distinct within its parent rail due to its heavy emphasis on comedy, particularly slapstick and situational humor, which is reflective of the genre's Southern roots.",
+  "top_features": [
+   "genre_Comedy (0.611)",
+   "genre_Drama (0.611)",
+   "genre_Romance (0.500)",
+   "decade_2010s (0.389)",
+   "Feature 0001 (24.619)"
+  ],
+  "method": "movies_first"
+ },
+ "(1, np.int64(1))": {
+  "name": "Southern Crime Dramas",
+  "description": "This sub-group stands out from its parent rail due to its strong emphasis on Southern settings and themes, which are reflected in the majority of its defining features.",
+  "top_features": [
+   "genre_Drama (0.667)",
+   "genre_Crime (0.619)",
+   "genre_Thriller (0.381)",
+   "decade_2010s (0.476)",
+   "Feature 0001 (24.909)"
+  ],
+  "method": "movies_first"
+ },
+ "(4, np.int64(0))": {
+  "name": "Future Action Blockbusters",
+  "description": "This sub-group stands out from its parent rail due to its high representation of sci-fi and action genres, as well as its focus on futuristic settings, with a strong emphasis on visual and thrilling elements.",
+  "top_features": [
+   "genre_Sci-Fi (0.728)",
+   "genre_Action (0.537)",
+   "genre_Adventure (0.362)",
+   "decade_2010s (0.355)",
+   "Feature 0041 (10.924)"
+  ],
+  "method": "movies_first"
+ },
+ "(4, np.int64(1))": {
+  "name": "Superhero Sci-Fi Blockbusters",
+  "description": "This sub-group is distinct from its parent rail due to its high representation of action and adventure genres, as well as its emphasis on science fiction and superhero themes.",
+  "top_features": [
+   "genre_Action (0.756)",
+   "genre_Adventure (0.756)",
+   "genre_Sci-Fi (0.600)",
+   "decade_2010s (0.378)",
+   "Extraterrestrial Life (14.096)"
+  ],
+  "method": "movies_first"
+ },
+ "(5, np.int64(0))": {
+  "name": "Russian Historical Dramas",
+  "description": "This sub-group is distinct within its parent rail due to its focus on historical dramas that explore the lives of notable figures from Russia's past.",
+  "top_features": [
+   "genre_Drama (0.904)",
+   "genre_Biography (0.616)",
+   "genre_History (0.438)",
+   "decade_2010s (0.274)",
+   "Feature 0288 (14.234)"
+  ],
+  "method": "movies_first"
+ },
+ "(5, np.int64(1))": {
+  "name": "War Films of the Decade",
+  "description": "This sub-group is distinct from its parent rail due to its heavy emphasis on war and drama genres, with a notable presence of films that explore the human experience during wartime.",
+  "top_features": [
+   "genre_Drama (0.914)",
+   "genre_War (0.603)",
+   "genre_Action (0.356)",
+   "decade_2010s (0.190)",
+   "Feature 0028 (12.280)"
+  ],
+  "method": "movies_first"
+ },
+ "(6, np.int64(0))": {
+  "name": "Crime Action Fire Films",
+  "description": "The sub-rail \"Crime Action Fire Films\" within \"Cluster 6\" is distinct due to its emphasis on high-energy action and crime elements, setting it apart from other sub-rails with a stronger focus on drama or other genres.",
+  "top_features": [
+   "genre_Crime (0.870)",
+   "genre_Action (0.739)",
+   "genre_Drama (0.391)",
+   "decade_1980s (0.217)",
+   "Feature 0227 (14.046)"
+  ],
+  "method": "movies_first"
+ },
+ "(6, np.int64(1))": {
+  "name": "East Asian Martial Flicks",
+  "description": "The East Asian Martial Flicks sub-group is distinct within its parent rail due to its unique blend of action, drama, and martial arts elements, set primarily in East Asia during the 1970s.",
+  "top_features": [
+   "genre_Action (0.907)",
+   "genre_Drama (0.442)",
+   "genre_Comedy (0.209)",
+   "decade_1970s (0.372)",
+   "Feature 0417 (11.283)"
+  ],
+  "method": "movies_first"
+ },
+ "(8, np.int64(0))": {
+  "name": "Japanese Youth Drama Films",
+  "description": "This sub-group stands out from its parent rail due to its unique blend of dramatic storytelling, romantic themes, and anime elements, set against the backdrop of contemporary Japanese society.",
+  "top_features": [
+   "genre_Drama (0.821)",
+   "genre_Romance (0.500)",
+   "genre_Animation (0.357)",
+   "decade_2010s (0.429)",
+   "Feature 0022 (25.719)"
+  ],
+  "method": "movies_first"
+ },
+ "(8, np.int64(1))": {
+  "name": "Japanese New Wave Thrillers",
+  "description": "This sub-group is distinct within its parent rail for its focus on Japanese New Wave Thrillers, characterized by a blend of genres and a strong emphasis on Japanese culture and setting.",
+  "top_features": [
+   "genre_Drama (0.678)",
+   "genre_Action (0.567)",
+   "genre_Crime (0.311)",
+   "decade_1960s (0.233)",
+   "Feature 0022 (25.443)"
+  ],
+  "method": "movies_first"
+ },
+ "(13, np.int64(0))": {
+  "name": "Los Angeles Crime Thrillers",
+  "description": "This sub-group stands out from its parent rail \"Cluster 13\" for its focus on crime thrillers, with a strong emphasis on crime and action genres, and a notable presence of Los Angeles settings.",
+  "top_features": [
+   "genre_Crime (0.825)",
+   "genre_Action (0.700)",
+   "genre_Drama (0.575)",
+   "decade_2000s (0.250)",
+   "Feature 0434 (19.586)"
+  ],
+  "method": "movies_first"
+ },
+ "(13, np.int64(1))": {
+  "name": "Los Angeles Nightmare Thrillers",
+  "description": "The \"Los Angeles Nightmare Thrillers\" sub-group within Cluster 13 is distinct due to its unique blend of dark and suspenseful themes, often incorporating elements of horror, crime, and drama, set against the backdrop of the city's iconic and often treacherous landscape.",
+  "top_features": [
+   "genre_Thriller (0.439)",
+   "genre_Drama (0.390)",
+   "genre_Horror (0.366)",
+   "decade_2010s (0.463)",
+   "Feature 0434 (19.978)"
+  ],
+  "method": "movies_first"
+ },
+ "(14, np.int64(0))": {
+  "name": "Harold & Kumar Franchise",
+  "description": "This sub-group is distinct within its parent rail due to its unique blend of comedic and satirical elements, particularly evident in the use of real-world locations and themes in films like \"Harold & Kumar Escape from Guantanamo Bay\".",
+  "top_features": [
+   "genre_Comedy (0.986)",
+   "genre_Action (0.433)",
+   "genre_Crime (0.383)",
+   "decade_2010s (0.305)",
+   "Feature 0381 (7.701)"
+  ],
+  "method": "movies_first"
+ },
+ "(14, np.int64(1))": {
+  "name": "Dark Comedy of the 2010s",
+  "description": "This sub-group is distinct within its parent rail \"Cluster 14\" by its unique blend of dark humor, satire, and genre-bending storytelling, which sets it apart from other sub-groups with more traditional comedic or dramatic focuses.",
+  "top_features": [
+   "genre_Comedy (0.810)",
+   "genre_Drama (0.810)",
+   "genre_Fantasy (0.333)",
+   "decade_2010s (0.286)",
+   "Feature 0341 (14.003)"
+  ],
+  "method": "movies_first"
+ },
+ "(16, np.int64(0))": {
+  "name": "Golden Age of Swing",
+  "description": "The Golden Age of Swing sub-group is distinct within its parent rail due to its unique blend of comedy, romance, and musical elements, which set it apart from other genres and decades represented in the rail.",
+  "top_features": [
+   "genre_Comedy (0.714)",
+   "genre_Romance (0.714)",
+   "genre_Musical (0.619)",
+   "decade_1940s (0.405)",
+   "Feature 0352 (12.649)"
+  ],
+  "method": "movies_first"
+ },
+ "(16, np.int64(1))": {
+  "name": "Biographical Dramas of Fame",
+  "description": "This sub-group is distinct within its parent rail due to its unique blend of biographical and dramatic elements, with a focus on the lives of famous artists and musicians.",
+  "top_features": [
+   "genre_Drama (0.952)",
+   "genre_Biography (0.702)",
+   "genre_Music (0.462)",
+   "decade_2010s (0.346)",
+   "Feature 0152 (14.099)"
+  ],
+  "method": "movies_first"
+ },
+ "(18, np.int64(0))": {
+  "name": "Wild Decade Island Thrills",
+  "description": "This sub-group stands out from the rest of the rail due to its unique blend of genres and distinct defining features, particularly the prominent presence of drama and comedy elements.",
+  "top_features": [
+   "genre_Drama (0.562)",
+   "genre_Comedy (0.438)",
+   "genre_Adventure (0.375)",
+   "decade_2010s (0.312)",
+   "Feature 0446 (23.263)"
+  ],
+  "method": "movies_first"
+ },
+ "(18, np.int64(1))": {
+  "name": "Island Noir Thrillers",
+  "description": "The \"Island Noir Thrillers\" sub-group is distinct within its parent rail due to its unique blend of atmospheric, genre-bending storytelling that combines elements of drama, horror, mystery, and thriller, often set against the isolated and foreboding backdrop of island settings.",
+  "top_features": [
+   "genre_Drama (0.579)",
+   "genre_Horror (0.526)",
+   "genre_Mystery (0.474)",
+   "decade_2010s (0.316)",
+   "Feature 0446 (26.737)"
+  ],
+  "method": "movies_first"
+ },
+ "(21, np.int64(0))": {
+  "name": "Spy Thrillers of Deception",
+  "description": "This sub-group is distinct within its parent rail due to its focus on spy thrillers with a strong emphasis on character-driven drama and intrigue, rather than solely on action or espionage.",
+  "top_features": [
+   "genre_Thriller (0.656)",
+   "genre_Drama (0.639)",
+   "genre_Action (0.508)",
+   "decade_2010s (0.246)",
+   "Feature 0046 (21.778)"
+  ],
+  "method": "movies_first"
+ },
+ "(21, np.int64(1))": {
+  "name": "Spy Thriller Blockbusters",
+  "description": "The Spy Thriller Blockbusters sub-group is distinct within its parent rail due to its high concentration of James Bond films, which dominate the genre mix and defining features.",
+  "top_features": [
+   "genre_Action (1.000)",
+   "genre_Adventure (0.675)",
+   "genre_Thriller (0.650)",
+   "decade_2010s (0.225)",
+   "Feature 0046 (23.646)"
+  ],
+  "method": "movies_first"
+ },
+ "(47, np.int64(0))": {
+  "name": "New York City Crime",
+  "description": "This sub-group is distinct within its parent rail due to its heavy focus on crime and thriller genres, with a notable emphasis on gritty, crime-ridden New York City settings.",
+  "top_features": [
+   "genre_Crime (0.800)",
+   "genre_Action (0.650)",
+   "genre_Thriller (0.600)",
+   "decade_2010s (0.300)",
+   "Feature 0233 (19.110)"
+  ],
+  "method": "movies_first"
+ },
+ "(47, np.int64(1))": {
+  "name": "New York City Crime",
+  "description": "This sub-group is distinct within its parent rail due to its heavy focus on gritty, crime-ridden portrayals of New York City in the 1990s, reflecting the city's notorious reputation for violence and crime during that era.",
+  "top_features": [
+   "genre_Crime (0.944)",
+   "genre_Drama (0.889)",
+   "genre_Thriller (0.444)",
+   "decade_1990s (0.278)",
+   "Feature 0233 (18.696)"
+  ],
+  "method": "movies_first"
+ },
+ "(51, np.int64(0))": {
+  "name": "Beyond the Haunted Halls",
+  "description": "This sub-group is distinct within its parent rail due to its unique blend of horror and mystery elements, with a focus on supernatural themes and atmospheric tension.",
+  "top_features": [
+   "genre_Horror (0.938)",
+   "genre_Mystery (0.875)",
+   "genre_Drama (0.375)",
+   "decade_2000s (0.438)",
+   "Ghosts (25.535)"
+  ],
+  "method": "movies_first"
+ },
+ "(51, np.int64(1))": {
+  "name": "Spirits of the 2010s",
+  "description": "This sub-group is distinct within its parent rail due to its unique blend of horror and comedic elements, setting it apart from other sub-rails with a stronger focus on thriller or mystery genres.",
+  "top_features": [
+   "genre_Horror (0.774)",
+   "genre_Comedy (0.323)",
+   "genre_Thriller (0.226)",
+   "decade_2010s (0.355)",
+   "Ghosts (20.764)"
+  ],
+  "method": "movies_first"
+ },
+ "(53, np.int64(0))": {
+  "name": "Teen Romantic Comedy Cluster",
+  "description": "The Teen Romantic Comedy Cluster is distinct within its parent rail due to its heavy emphasis on romantic comedies, with a strong focus on female-led stories and coming-of-age themes.",
+  "top_features": [
+   "genre_Comedy (0.968)",
+   "genre_Romance (0.839)",
+   "genre_Drama (0.516)",
+   "decade_2010s (0.419)",
+   "Feature 0304 (12.336)"
+  ],
+  "method": "movies_first"
+ },
+ "(53, np.int64(1))": {
+  "name": "Young Adult Coming-of-Age",
+  "description": "This sub-group is distinct within its parent rail due to its focus on young adult coming-of-age themes, often incorporating elements of drama, romance, and comedy in a way that sets it apart from other sub-rails.",
+  "top_features": [
+   "genre_Drama (0.870)",
+   "genre_Comedy (0.652)",
+   "genre_Romance (0.652)",
+   "decade_2010s (0.435)",
+   "Feature 0304 (11.045)"
+  ],
+  "method": "movies_first"
+ },
+ "(54, np.int64(0))": {
+  "name": "Midnight Horror Thriller Cluster",
+  "description": "The Midnight Horror Thriller Cluster is distinct within its parent rail due to its heavy emphasis on horror elements, with a high concentration of supernatural themes and a strong presence of horror sub-genres.",
+  "top_features": [
+   "genre_Horror (0.976)",
+   "genre_Thriller (0.317)",
+   "genre_Drama (0.122)",
+   "decade_2010s (0.415)",
+   "Supernatural Phenomena (6.368)"
+  ],
+  "method": "movies_first"
+ },
+ "(54, np.int64(1))": {
+  "name": "Devil's Den of Darkness",
+  "description": "This sub-group is distinct within its parent rail due to its heavy emphasis on horror themes and its exploration of darker, more occult-inspired elements.",
+  "top_features": [
+   "genre_Horror (1.000)",
+   "genre_Mystery (0.429)",
+   "genre_Drama (0.286)",
+   "decade_2010s (0.333)",
+   "Religious themes (14.925)"
+  ],
+  "method": "movies_first"
+ }
+}

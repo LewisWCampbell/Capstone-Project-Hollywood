@@ -92,3 +92,7 @@ gcs-service-account.json
 
 # Local scratch (Claude cleanup staging)
 _to_delete/
+
+# Dashboard artifacts the app needs (override the global *.json ignore above)
+!Final Documents/Dashboard/results/artifacts/*.json
+!Final Documents/Dashboard/results/cluster_status.json

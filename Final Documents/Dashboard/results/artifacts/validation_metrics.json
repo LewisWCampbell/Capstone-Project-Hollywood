@@ -1,0 +1,9 @@
+{
+ "xgb_cv_accuracy": 0.8963424599003863,
+ "xgb_cv_std": 0.00809260849865892,
+ "n_clusters": 67,
+ "f1_threshold": 0.7,
+ "per_cluster_f1": {},
+ "merge_log": [],
+ "total_merges": 0
+}

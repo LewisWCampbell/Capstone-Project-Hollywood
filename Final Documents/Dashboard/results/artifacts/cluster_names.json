@@ -1,0 +1,404 @@
+{
+ "0": {
+  "name": "Indian Cinema of the 2010s",
+  "description": "The movies in this rail are united by their focus on Indian cinema and culture, with a diverse range of genres and themes that reflect the complexity and richness of the country's film industry.",
+  "top_features": "27% Drama, 14% Action, 12% Romance, 12% Comedy, 11% Crime, 8% Thriller",
+  "method": "movies_first"
+ },
+ "1": {
+  "name": "Southern American Indie Dramas",
+  "description": "The movies in the \"Southern American Indie Dramas\" rail share a common thread of exploring the complexities and nuances of life in the American South through character-driven dramas and stories.",
+  "top_features": "25% Drama, 15% Crime, 11% Thriller, 9% Action, 9% Comedy, 8% Romance, 5% Horror",
+  "method": "movies_first"
+ },
+ "2": {
+  "name": "American Sports Inspirational Films",
+  "description": "The movies in the \"American Sports Inspirational Films\" rail share a common thread of featuring underdog stories and triumphs of athletes and teams overcoming adversity in sports.",
+  "top_features": "26% Drama, 23% Sport, 14% Comedy, 10% Biography, 9% Action",
+  "method": "movies_first"
+ },
+ "3": {
+  "name": "Faith and the Human Condition",
+  "description": "The movies in this rail share a common thread of exploring complex human emotions and experiences through a philosophical and introspective lens, often incorporating themes of spirituality, morality, and existential inquiry.",
+  "top_features": "36% Drama, 15% Romance, 7% Crime, 7% Mystery, 5% Fantasy, 5% Comedy",
+  "method": "movies_first"
+ },
+ "4": {
+  "name": "Cosmic Frontier Thrill Ride",
+  "description": "The movies in the \"Cosmic Frontier Thrill Ride\" rail share a common thread of exploring the intersection of science, technology, and human adventure in the realm of space and extraterrestrial life.",
+  "top_features": "23% Sci-Fi, 20% Action, 14% Adventure, 10% Drama, 8% Horror, 6% Thriller",
+  "method": "movies_first"
+ },
+ "5": {
+  "name": "War and Historical Drama",
+  "description": "The movies in this rail are united by their exploration of historical events, figures, and periods, often with a focus on the human experience and the complexities of war and politics.",
+  "top_features": "33% Drama, 12% Biography, 12% History, 11% War, 9% Action, 7% Adventure, 5% Romance",
+  "method": "movies_first"
+ },
+ "6": {
+  "name": "Crime Thrillers of Asia",
+  "description": "The movies in the \"Crime Thrillers of Asia\" rail share a common thread of exploring the darker aspects of human nature and crime in the Asian context.",
+  "top_features": "31% Action, 22% Drama, 20% Crime, 9% Thriller",
+  "method": "movies_first"
+ },
+ "7": {
+  "name": "East Asian Romantic Dramas",
+  "description": "The movies in this rail share a common thread of exploring the complexities of Asian identity, culture, and relationships through the lens of romantic dramas.",
+  "top_features": "37% Drama, 28% Romance, 10% Comedy, 6% Crime",
+  "method": "movies_first"
+ },
+ "8": {
+  "name": "Japanese New Wave Cinema",
+  "description": "These Japanese New Wave Cinema movies share a common thread of exploring the complexities of Japanese culture, identity, and society through a diverse range of genres and themes.",
+  "top_features": "26% Drama, 14% Action, 8% Animation, 8% Crime, 7% Adventure, 7% Romance, 6% Comedy",
+  "method": "movies_first"
+ },
+ "9": {
+  "name": "Female Force: Crime & Rebellion",
+  "description": "The movies in the \"Female Force: Crime & Rebellion\" rail share a common thread of featuring complex, empowered female characters who drive the narrative and challenge societal norms in the context of crime and rebellion.",
+  "top_features": "29% Drama, 20% Crime, 13% Action, 9% Thriller, 5% Comedy, 5% Mystery",
+  "method": "movies_first"
+ },
+ "10": {
+  "name": "American Frontier Classics",
+  "description": "The movies in the \"American Frontier Classics\" rail are united by their exploration of the American West and the rugged, often violent, world of the frontier era.",
+  "top_features": "31% Drama, 25% Western, 17% Action, 8% Romance, 6% Adventure",
+  "method": "movies_first"
+ },
+ "11": {
+  "name": "Dark Crime Thrillers",
+  "description": "The movies in the \"Dark Crime Thrillers\" rail share a common thread of exploring the darker aspects of human nature, often through the lens of socially marginalized characters and protagonists struggling with emotional trauma and isolation.",
+  "top_features": "38% Drama, 29% Crime, 19% Thriller",
+  "method": "movies_first"
+ },
+ "12": {
+  "name": "Bizarre Fantastical Comedy Cluster",
+  "description": "The movies in the \"Bizarre Fantastical Comedy Cluster\" rail share a common thread of blending humor, fantasy, and absurdity, often with a focus on comedic takes on mythology, folklore, and supernatural themes.",
+  "top_features": "37% Comedy, 22% Fantasy, 10% Adventure, 10% Horror, 9% Action",
+  "method": "movies_first"
+ },
+ "13": {
+  "name": "Los Angeles Crime Thrillers",
+  "description": "The movies in the \"Los Angeles Crime Thrillers\" rail share a common thread of exploring the darker side of Los Angeles, often focusing on crime, violence, and the complexities of human nature in the city's gritty underbelly.",
+  "top_features": "22% Crime, 19% Drama, 16% Action, 12% Thriller, 10% Comedy, 6% Horror",
+  "method": "movies_first"
+ },
+ "14": {
+  "name": "Sick to Laughter",
+  "description": "The movies in the \"Sick to Laughter\" rail share a common thread of using humor and satire to critique societal norms and conventions.",
+  "top_features": "37% Comedy, 14% Crime, 13% Action, 9% Adventure, 6% Drama",
+  "method": "movies_first"
+ },
+ "15": {
+  "name": "British Indie Rom-Coms",
+  "description": "The movies in the \"British Indie Rom-Coms\" rail share a common thread of blending romance with elements of drama, comedy, and genre-bending, often set against the backdrop of contemporary British life.",
+  "top_features": "23% Drama, 17% Thriller, 17% Romance, 15% Crime, 12% Comedy, 8% Horror",
+  "method": "movies_first"
+ },
+ "16": {
+  "name": "Artists on the Big Screen",
+  "description": "The movies in the \"Artists on the Big Screen\" rail are united by their focus on the lives and creative journeys of artists, musicians, and performers.",
+  "top_features": "25% Drama, 15% Comedy, 12% Biography, 12% Romance, 12% Music, 7% Musical",
+  "method": "movies_first"
+ },
+ "17": {
+  "name": "Mid-Century Western Thrillers",
+  "description": "The movies in the \"Mid-Century Western Thrillers\" rail share a common thread of exploring themes of deception, betrayal, and the breakdown of trust in the American West during the 1930s.",
+  "top_features": "25% Drama, 17% Adventure, 15% Crime, 12% Action, 7% Romance, 6% Comedy",
+  "method": "movies_first"
+ },
+ "18": {
+  "name": "Islands of the Mind",
+  "description": "The movies in the \"Islands of the Mind\" rail share a common thread of psychological exploration and survival on isolated island settings.",
+  "top_features": "18% Drama, 13% Comedy, 12% Adventure, 9% Horror, 9% Thriller, 9% Romance, 9% Mystery, 7% Action",
+  "method": "movies_first"
+ },
+ "19": {
+  "name": "Family Redemption Stories",
+  "description": "The movies in this rail share a common thread of exploring themes of family, redemption, and personal growth through the lens of family dynamics and relationships.",
+  "top_features": "36% Drama, 18% Romance, 10% Comedy, 9% Crime, 5% Thriller",
+  "method": "movies_first"
+ },
+ "20": {
+  "name": "High-Octane Action Flicks",
+  "description": "The movies in the \"High-Octane Action Flicks\" rail share a common thread of high-stakes, adrenaline-fueled action sequences and intense, often violent, confrontations.",
+  "top_features": "37% Action, 29% Thriller, 11% Adventure, 10% Crime, 7% Drama",
+  "method": "movies_first"
+ },
+ "21": {
+  "name": "Spy Thrillers of Deception",
+  "description": "The movies in the \"Spy Thrillers of Deception\" rail share a common thread of espionage, deception, and betrayal, often featuring secret agents and undercover operations.",
+  "top_features": "27% Action, 20% Thriller, 13% Drama, 11% Adventure, 10% Crime, 6% Comedy",
+  "method": "movies_first"
+ },
+ "22": {
+  "name": "Thrilling Family Mysteries",
+  "description": "The movies in the \"Thrilling Family Mysteries\" rail share a common thread of exploring complex family dynamics and relationships through suspenseful, crime-ridden narratives.",
+  "top_features": "33% Drama, 26% Crime, 18% Mystery, 14% Thriller",
+  "method": "movies_first"
+ },
+ "23": {
+  "name": "Vigilante Revenge Thrillers",
+  "description": "The movies in the \"Vigilante Revenge Thrillers\" rail share a common thread of featuring protagonists driven by a desire for retribution, often through violent and intense means.",
+  "top_features": "33% Action, 29% Thriller, 27% Crime, 9% Drama",
+  "method": "movies_first"
+ },
+ "24": {
+  "name": "Dark Suburban Descent",
+  "description": "The movies in the \"Dark Suburban Descent\" rail share a common thread of exploring the darker aspects of suburban life, often blurring the lines between reality and the supernatural.",
+  "top_features": "31% Horror, 19% Thriller, 18% Drama, 13% Mystery, 5% Action",
+  "method": "movies_first"
+ },
+ "25": {
+  "name": "Crime Thrillers of Retribution",
+  "description": "The movies in the \"Crime Thrillers of Retribution\" rail share a common thread of seeking revenge and retribution for past wrongs, often in a gritty and violent urban setting.",
+  "top_features": "28% Action, 23% Crime, 21% Drama, 13% Thriller",
+  "method": "movies_first"
+ },
+ "26": {
+  "name": "Crime Thrillers of Deceit",
+  "description": "The movies in the \"Crime Thrillers of Deceit\" rail are united by their exploration of the darker aspects of human nature, particularly greed, avarice, and the blurred lines between right and wrong.",
+  "top_features": "31% Crime, 18% Drama, 17% Thriller, 13% Action, 10% Comedy",
+  "method": "movies_first"
+ },
+ "27": {
+  "name": "Classic Romantic Comedies",
+  "description": "The movies in the \"Classic Romantic Comedies\" rail share a common thread of blending romantic and comedic elements, often with a focus on witty dialogue and charming protagonists.",
+  "top_features": "40% Comedy, 37% Romance, 14% Drama",
+  "method": "movies_first"
+ },
+ "28": {
+  "name": "French Romantic Comedies",
+  "description": "The movies in the \"French Romantic Comedies\" rail share a common thread of exploring the complexities of love, relationships, and human connections in the context of French culture and society.",
+  "top_features": "33% Drama, 29% Romance, 14% Comedy, 7% Crime",
+  "method": "movies_first"
+ },
+ "29": {
+  "name": "French Crime Thrillers",
+  "description": "The movies in the \"French Crime Thrillers\" rail share a common thread of exploring the darker aspects of human nature and the French underworld, often featuring crime, mystery, and suspense.",
+  "top_features": "35% Crime, 25% Drama, 15% Thriller, 8% Mystery, 5% Action, 5% Horror",
+  "method": "movies_first"
+ },
+ "30": {
+  "name": "Love, Deceit, and Turmoil",
+  "description": "The movies in this rail share a common thread of complex, often toxic, and deeply personal relationships that drive the narrative and character development.",
+  "top_features": "36% Drama, 26% Romance, 13% Thriller, 8% Crime",
+  "method": "movies_first"
+ },
+ "31": {
+  "name": "Romantic Comedies of the 90s",
+  "description": "The movies in this rail are united by their focus on romantic relationships and comedic elements, often exploring themes of love, relationships, and personal growth.",
+  "top_features": "37% Comedy, 35% Romance, 20% Drama",
+  "method": "movies_first"
+ },
+ "32": {
+  "name": "Romantic Drama Turmoil",
+  "description": "The movies in the \"Romantic Drama Turmoil\" rail share a common thread of exploring complex, often tumultuous relationships and the emotional struggles that come with them.",
+  "top_features": "40% Drama, 37% Romance, 11% Comedy",
+  "method": "movies_first"
+ },
+ "33": {
+  "name": "Romantic Turbulence of the Decade",
+  "description": "The movies in the \"Romantic Turbulence of the Decade\" rail share a common thread of exploring the complexities and challenges of romantic relationships amidst tumultuous personal and societal circumstances.",
+  "top_features": "41% Romance, 38% Drama, 11% Comedy",
+  "method": "movies_first"
+ },
+ "34": {
+  "name": "Wildlife Horror Flicks",
+  "description": "The movies in the \"Wildlife Horror Flicks\" rail share a common thread of featuring terrifying and often deadly wildlife as the primary antagonist, sparking a struggle for survival in a terrifying and suspenseful narrative.",
+  "top_features": "28% Horror, 14% Action, 13% Adventure, 12% Thriller, 12% Sci-Fi, 7% Drama, 6% Comedy",
+  "method": "movies_first"
+ },
+ "35": {
+  "name": "Wilderness of the Americas",
+  "description": "The movies in the \"Wilderness of the Americas\" rail share a common thread of being set in the American wilderness, often with a focus on survival, horror, and the unknown.",
+  "top_features": "29% Horror, 14% Thriller, 11% Mystery, 11% Drama, 10% Action, 7% Adventure, 7% Fantasy, 6% Comedy",
+  "method": "movies_first"
+ },
+ "36": {
+  "name": "Dark Minds of Justice",
+  "description": "The movies in the \"Dark Minds of Justice\" rail share a common thread of exploring the darker aspects of human nature through the lens of crime, mystery, and suspense, often featuring complex villains and a sense of moral ambiguity.",
+  "top_features": "29% Crime, 20% Drama, 15% Mystery, 12% Action, 8% Thriller, 5% Horror",
+  "method": "movies_first"
+ },
+ "37": {
+  "name": "Mind Games and Mayhem",
+  "description": "The movies in the \"Mind Games and Mayhem\" rail share a common thread of psychological complexity and suspense, often blurring the lines between reality and the human psyche.",
+  "top_features": "27% Thriller, 24% Mystery, 17% Horror, 12% Drama, 10% Crime",
+  "method": "movies_first"
+ },
+ "38": {
+  "name": "Mind Games and Melancholy",
+  "description": "The movies in the \"Mind Games and Melancholy\" rail share a common thread of exploring the complexities of the human psyche, often featuring protagonists struggling with mental health issues, emotional turmoil, and existential crises.",
+  "top_features": "38% Drama, 26% Thriller, 18% Mystery, 9% Romance",
+  "method": "movies_first"
+ },
+ "39": {
+  "name": "Psychological Horror Thrillers",
+  "description": "The movies in this rail share a common thread of psychological horror and suspense, exploring the darker aspects of the human mind and the blurring of reality and fantasy.",
+  "top_features": "32% Horror, 27% Thriller, 18% Drama, 11% Mystery, 5% Crime",
+  "method": "movies_first"
+ },
+ "40": {
+  "name": "Romantic Comedies of Love",
+  "description": "The movies in the \"Romantic Comedies of Love\" rail share a common thread of exploring the complexities and joys of romantic relationships through a blend of comedy, romance, and drama.",
+  "top_features": "39% Comedy, 39% Romance, 14% Drama",
+  "method": "movies_first"
+ },
+ "41": {
+  "name": "New York Love Stories",
+  "description": "The movies in the \"New York Love Stories\" rail share a common thread of exploring the complexities and nuances of love, relationships, and identity in the vibrant and often overwhelming city of New York.",
+  "top_features": "35% Comedy, 33% Romance, 20% Drama",
+  "method": "movies_first"
+ },
+ "42": {
+  "name": "Classic Film Noir Mysteries",
+  "description": "The movies in the \"Classic Film Noir Mysteries\" rail share a common thread of featuring complex, suspenseful whodunnit mysteries set against the dark and gritty backdrop of mid-20th century America.",
+  "top_features": "28% Crime, 20% Mystery, 17% Drama, 7% Comedy, 7% Film-Noir",
+  "method": "movies_first"
+ },
+ "43": {
+  "name": "Post-War Whodunits & Thrillers",
+  "description": "The movies in this rail are unified by their focus on solving a mystery or uncovering a crime, often set against a backdrop of psychological tension and suspense characteristic of the post-war era.",
+  "top_features": "24% Crime, 20% Drama, 19% Mystery, 9% Comedy, 7% Horror, 7% Thriller",
+  "method": "movies_first"
+ },
+ "44": {
+  "name": "Murderous Affairs and Twists",
+  "description": "The movies in the \"Murderous Affairs and Twists\" rail all share a common thread of complex, suspenseful relationships and intricate plots that lead to shocking reveals and unexpected outcomes.",
+  "top_features": "29% Drama, 27% Mystery, 23% Crime, 11% Thriller",
+  "method": "movies_first"
+ },
+ "45": {
+  "name": "Police Thrillers of the 2020s",
+  "description": "The movies in this rail share a common thread of exploring the darker aspects of human nature and the complexities of law enforcement through gripping and suspenseful storylines.",
+  "top_features": "30% Crime, 21% Drama, 15% Mystery, 11% Action, 11% Thriller",
+  "method": "movies_first"
+ },
+ "46": {
+  "name": "Police Thrillers of the 90s",
+  "description": "The movies in the \"Police Thrillers of the 90s\" rail are united by their focus on the challenges and struggles faced by law enforcement officers, often in the context of crime and violence.",
+  "top_features": "30% Crime, 27% Action, 20% Drama, 17% Thriller",
+  "method": "movies_first"
+ },
+ "47": {
+  "name": "New York City Crime Dramas",
+  "description": "The movies in the \"New York City Crime Dramas\" rail are united by their gritty and intense portrayal of crime and law enforcement in the city, often exploring the darker aspects of human nature and the complexities of the human condition.",
+  "top_features": "32% Crime, 25% Drama, 16% Thriller, 11% Action, 6% Mystery",
+  "method": "movies_first"
+ },
+ "48": {
+  "name": "Family Love Stories",
+  "description": "The movies in this rail share a common thread of exploring the complexities and nuances of family relationships, love, and personal growth, often with a focus on the emotional journeys of the family members.",
+  "top_features": "35% Comedy, 32% Romance, 22% Drama",
+  "method": "movies_first"
+ },
+ "49": {
+  "name": "Family Friendly Laughs",
+  "description": "The movies in \"Family Friendly Laughs\" rail share a common thread of lighthearted, family-centric comedies that focus on humor and everyday family life.",
+  "top_features": "38% Comedy, 22% Family, 8% Adventure, 7% Crime, 6% Drama",
+  "method": "movies_first"
+ },
+ "50": {
+  "name": "Asian Supernatural Horror Classics",
+  "description": "The movies in this rail share a common thread of exploring the darker aspects of Asian culture and folklore, often featuring supernatural elements and eerie atmospheres.",
+  "top_features": "45% Horror, 11% Drama, 9% Mystery, 9% Comedy, 9% Fantasy, 7% Thriller",
+  "method": "movies_first"
+ },
+ "51": {
+  "name": "Darkness Beyond the Veil",
+  "description": "The movies in the \"Darkness Beyond the Veil\" rail share a common thread of exploring the darker aspects of human experience, often featuring supernatural or paranormal elements that serve as a catalyst for psychological and emotional turmoil.",
+  "top_features": "37% Horror, 19% Mystery, 14% Thriller, 12% Drama, 8% Fantasy, 5% Comedy",
+  "method": "movies_first"
+ },
+ "52": {
+  "name": "Early Life Struggles",
+  "description": "The movies in the \"Early Life Struggles\" rail all share a common thread of exploring the challenges, hardships, and formative experiences of the protagonist's early life, often with a focus on social and emotional issues.",
+  "top_features": "43% Drama, 9% War, 7% Romance, 6% Biography, 6% Family, 5% Crime",
+  "method": "movies_first"
+ },
+ "53": {
+  "name": "Coming of Age Comedies",
+  "description": "The movies in the \"Coming of Age Comedies\" rail share a common thread of exploring the challenges and humor of transitioning from adolescence to adulthood through the lens of relatable, often humorous, coming-of-age narratives.",
+  "top_features": "31% Romance, 28% Comedy, 28% Drama",
+  "method": "movies_first"
+ },
+ "54": {
+  "name": "Dark Corners of America",
+  "description": "The movies in the \"Dark Corners of America\" rail share a common thread of exploring the darker aspects of human nature, the supernatural, and the unknown, often with a focus on horror and the occult.",
+  "top_features": "49% Horror, 14% Thriller, 10% Mystery, 9% Drama, 6% Fantasy",
+  "method": "movies_first"
+ },
+ "55": {
+  "name": "Treasures of Youthful Adventure",
+  "description": "The movies in the \"Treasures of Youthful Adventure\" rail share a common thread of youthful exploration, adventure, and coming-of-age themes, often set in a nostalgic or fantastical context.",
+  "top_features": "31% Adventure, 30% Family, 19% Comedy, 7% Drama, 6% Action",
+  "method": "movies_first"
+ },
+ "56": {
+  "name": "Stories of Childhood Courage",
+  "description": "The movies in the \"Stories of Childhood Courage\" rail share a common thread of exploring the resilience and courage of children and young adults in the face of adversity, often set against a backdrop of nature and the great outdoors.",
+  "top_features": "34% Drama, 29% Family, 15% Adventure, 14% Comedy",
+  "method": "movies_first"
+ },
+ "57": {
+  "name": "Survival Horror Thrill Ride",
+  "description": "The movies in this rail share a common thread of intense, suspenseful, and often brutal explorations of human survival and the darker aspects of human nature.",
+  "top_features": "51% Horror, 33% Thriller",
+  "method": "movies_first"
+ },
+ "58": {
+  "name": "Psychological Horror Thrills",
+  "description": "The movies in this rail share a common thread of psychological manipulation and exploitation, often featuring unstable protagonists and villains who push the boundaries of psychological horror and terror.",
+  "top_features": "32% Horror, 21% Thriller, 15% Drama, 11% Crime, 10% Mystery",
+  "method": "movies_first"
+ },
+ "59": {
+  "name": "Whimsical Family Fantasy Flicks",
+  "description": "The movies in the \"Whimsical Family Fantasy Flicks\" rail share a common thread of blending fantasy and adventure elements with comedic and lighthearted tone, appealing to a family-friendly audience.",
+  "top_features": "26% Comedy, 24% Adventure, 23% Family, 12% Fantasy, 8% Animation",
+  "method": "movies_first"
+ },
+ "60": {
+  "name": "Family Friendly Animated Comedies",
+  "description": "The movies in this rail share a common thread of being all-ages, family-friendly animated comedies that often feature talking animals and wholesome storylines.",
+  "top_features": "31% Comedy, 25% Adventure, 18% Family, 14% Animation",
+  "method": "movies_first"
+ },
+ "61": {
+  "name": "Shrek Franchise Faves",
+  "description": "The Shrek Franchise Faves rail unifies the movies through their shared blend of humor, adventure, and fantasy elements, often featuring talking animals and comedic characters in medieval-inspired settings.",
+  "top_features": "32% Animation, 29% Adventure, 21% Comedy, 9% Family, 7% Action",
+  "method": "movies_first"
+ },
+ "62": {
+  "name": "Timeless Fairy Tale Classics",
+  "description": "The movies in the \"Timeless Fairy Tale Classics\" rail share a common thread of enchanting and imaginative storytelling, often with a strong focus on romance, fantasy, and feel-good narratives.",
+  "top_features": "21% Fantasy, 18% Adventure, 16% Family, 11% Animation, 11% Comedy, 10% Romance, 8% Drama",
+  "method": "movies_first"
+ },
+ "63": {
+  "name": "Imaginary Worlds of Youth",
+  "description": "The movies in the \"Imaginary Worlds of Youth\" rail share a common thread of exploring the transition from childhood to adulthood through fantastical and imaginative worlds.",
+  "top_features": "31% Adventure, 29% Family, 24% Fantasy, 7% Drama, 5% Action",
+  "method": "movies_first"
+ },
+ "64": {
+  "name": "Medieval Fantasy Action Frenzy",
+  "description": "The movies in the \"Medieval Fantasy Action Frenzy\" rail share a common thread of epic battles, magical creatures, and heroic quests set in a richly detailed medieval fantasy world.",
+  "top_features": "27% Adventure, 25% Fantasy, 22% Action, 10% Drama, 6% Family",
+  "method": "movies_first"
+ },
+ "65": {
+  "name": "Family Friendly Animated Adventures",
+  "description": "The movies in this rail share a common thread of blending entertainment and education, targeting a broad audience and emphasizing wholesome, family-friendly content.",
+  "top_features": "35% Animation, 29% Adventure, 22% Comedy, 6% Action, 5% Family",
+  "method": "movies_first"
+ },
+ "66": {
+  "name": "Animated Comedic Adventures",
+  "description": "The movies in the \"Animated Comedic Adventures\" rail share a common thread of blending humor, adventure, and heart, often featuring lovable and quirky animated characters in comedic and action-packed storylines.",
+  "top_features": "35% Animation, 29% Adventure, 29% Comedy",
+  "method": "movies_first"
+ }
+}
