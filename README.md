@@ -15,7 +15,7 @@
 <h3 align="center">Can a machine build the rows on a streaming homepage with no viewing data at all?</h3>
 
 <p align="center">
-Project Hollywood is my MS Business Analytics capstone at Chapman University: an end-to-end unsupervised learning pipeline that organizes <b>8,000 films</b> into <b>67 coherent, human-readable “rails”</b> using only what the films <i>are</i> (a 248-feature content genome, genres, and eras), then validates, explains, and names every rail automatically, and hands the result to curators through an interactive dashboard.
+Project Hollywood was the first project in my MS in Business Analytics at Chapman University: an end-to-end unsupervised learning pipeline that organizes <b>8,000 films</b> into <b>67 coherent, human-readable “rails”</b> using only what the films <i>are</i> (a 248-feature content genome, genres, and eras), then validates, explains, and names every rail automatically, and hands the result to curators through an interactive dashboard.
 </p>
 
 <p align="center"><b><a href="https://capstone-project-hollywood.streamlit.app/">Try the live dashboard</a></b>: start with <i>Final Rails</i>, then click into any rail in <i>Cluster Explorer</i>.</p>
@@ -110,7 +110,7 @@ The full pipeline with every experiment and justification lives in **`Final Docu
 
 ## A note on the data
 
-The 248-feature content genome was provided for this capstone by an industry partner and is proprietary. To make the repository public, the **feature, category, and sub-category names have been anonymized** to ID-keyed placeholders (`Feature 0440`, `Category 13`, `Subcategory 13.2`) everywhere they appear: data files, notebooks, dashboard artifacts, and derived outputs. Feature IDs, relevance scores, and every stage of the pipeline are unchanged, so results reproduce exactly; only the human-readable labels are withheld. Genre labels, IMDb identifiers, and OMDb-sourced metadata are public data.
+The 248-feature content genome was provided for the course by an industry partner and is proprietary. To make the repository public, the **feature, category, and sub-category names have been anonymized** to ID-keyed placeholders (`Feature 0440`, `Category 13`, `Subcategory 13.2`) everywhere they appear: data files, notebooks, dashboard artifacts, and derived outputs. Feature IDs, relevance scores, and every stage of the pipeline are unchanged, so results reproduce exactly; only the human-readable labels are withheld. Genre labels, IMDb identifiers, and OMDb-sourced metadata are public data.
 
 ## What I'd do next
 
@@ -121,7 +121,7 @@ The 248-feature content genome was provided for this capstone by an industry par
 
 ## Team & acknowledgements
 
-Built with my capstone teammates for the **MS in Business Analytics at Chapman University's Argyros College of Business and Economics**. Thanks to our faculty advisor, who also arranged access to the content-genome dataset through an industry partner.
+Built with my project teammates in the **MS in Business Analytics at Chapman University's Argyros College of Business and Economics**. Thanks to our faculty advisor, who also arranged access to the content-genome dataset through an industry partner.
 
 Film metadata and posters courtesy of the [OMDb API](https://www.omdbapi.com/) and [TMDB](https://www.themoviedb.org/). This product uses the TMDB API but is not endorsed or certified by TMDB.
 
