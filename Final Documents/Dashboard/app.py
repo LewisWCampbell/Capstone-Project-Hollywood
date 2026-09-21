@@ -165,6 +165,7 @@ pages = [
     ("Data Health", "Sparsity, feature distributions, IDF weights and annotation density of the input data."),
     ("Pipeline Runner", "Re-run the clustering pipeline with different parameters and watch the metrics change."),
     ("Experiment Tracker", "Compare runs across parameter configurations and track metric history."),
+    ("Rail Naming", "Regenerate every rail and sub-rail name with the language model (admin key required)."),
 ]
 for title, desc in pages:
     st.markdown(f"**{title}**: {desc}")
